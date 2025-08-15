@@ -45,6 +45,10 @@ const AIOrb: React.FC<AIOrbProps> = ({
 
   // Use focused prop or global focus state
   const isOrbFocused = focused || isFocused;
+  
+  // Always show the correct state based on connection status
+  const shouldShowWaveform = isConnected && !isMuted;
+  
   useEffect(() => {
     // Update global focus state when focused prop changes
     if (focused !== isFocused) {
@@ -62,7 +66,7 @@ const AIOrb: React.FC<AIOrbProps> = ({
         {/* Waveform Animation when active and not muted - smooth entrance/exit */}
         <div className={`
           flex items-center gap-0.5 transition-all duration-500 ease-out overflow-hidden
-          ${isConnected && !isMuted ? 'max-w-16 opacity-100' : 'max-w-0 opacity-0'}
+          ${shouldShowWaveform ? 'max-w-16 opacity-100 ml-2' : 'max-w-0 opacity-0 ml-0'}
         `}>
           <div className="w-0.5 h-3 bg-ai-blue rounded-full animate-waveform"></div>
           <div className="w-0.5 h-4 bg-ai-blue rounded-full animate-waveform-delayed"></div>
