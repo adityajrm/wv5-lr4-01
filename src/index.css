@@ -32,6 +32,11 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    
+    /* AI Visual Effects */
+    --ai-blue: 210 100% 60%;
+    --ai-blue-glow: 210 100% 70%;
+    --ai-muted: 0 0% 50%;
   }
 
   .dark {
@@ -59,6 +64,11 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    
+    /* AI Visual Effects - Dark Mode */
+    --ai-blue: 210 100% 70%;
+    --ai-blue-glow: 210 100% 80%;
+    --ai-muted: 0 0% 60%;
   }
 }
 

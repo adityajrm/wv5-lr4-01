@@ -46,6 +46,9 @@ export default {
 						card: 'rgba(30, 30, 30, 0.7)' // Semi-transparent black for cards
 					}
 				},
+				'ai-blue': 'hsl(var(--ai-blue))',
+				'ai-blue-glow': 'hsl(var(--ai-blue-glow))',
+				'ai-muted': 'hsl(var(--ai-muted))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -132,6 +135,42 @@ export default {
 				'slide-slow-reverse': {
 					'0%': { transform: 'translateX(100%)' },
 					'100%': { transform: 'translateX(-100%)' }
+				},
+				'waveform': {
+					'0%, 100%': { transform: 'scaleY(0.3)' },
+					'50%': { transform: 'scaleY(1)' }
+				},
+				'ai-pulse-complex': {
+					'0%': { 
+						boxShadow: '0 0 0 0 hsl(var(--ai-blue) / 0.7)',
+						transform: 'scale(1)' 
+					},
+					'25%': { 
+						boxShadow: '0 0 0 8px hsl(var(--ai-blue) / 0.3)',
+						transform: 'scale(1.02)' 
+					},
+					'50%': { 
+						boxShadow: '0 0 0 15px hsl(var(--ai-blue) / 0.1)',
+						transform: 'scale(1)' 
+					},
+					'75%': { 
+						boxShadow: '0 0 0 8px hsl(var(--ai-blue) / 0.2)',
+						transform: 'scale(1.01)' 
+					},
+					'100%': { 
+						boxShadow: '0 0 0 0 hsl(var(--ai-blue) / 0)',
+						transform: 'scale(1)' 
+					}
+				},
+				'border-bleed': {
+					'0%': { 
+						'border-image-source': 'linear-gradient(90deg, hsl(var(--ai-blue)) 0%, transparent 0%)',
+						'border-image-slice': '1'
+					},
+					'100%': { 
+						'border-image-source': 'linear-gradient(90deg, hsl(var(--ai-blue)) 100%, transparent 0%)',
+						'border-image-slice': '1'
+					}
 				}
 			},
 			animation: {
@@ -147,7 +186,12 @@ export default {
 				'snow': 'snow 4s linear infinite',
 				'lightning': 'lightning 3s infinite',
 				'slide-slow': 'slide-slow 20s linear infinite',
-				'slide-slow-reverse': 'slide-slow-reverse 25s linear infinite'
+				'slide-slow-reverse': 'slide-slow-reverse 25s linear infinite',
+				'waveform': 'waveform 0.6s ease-in-out infinite',
+				'waveform-delayed': 'waveform 0.8s ease-in-out infinite 0.2s',
+				'waveform-delayed-2': 'waveform 0.7s ease-in-out infinite 0.4s',
+				'ai-pulse-complex': 'ai-pulse-complex 3s ease-in-out infinite',
+				'border-bleed': 'border-bleed 2s ease-in-out forwards'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'

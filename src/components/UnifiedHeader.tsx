@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import WeatherWidget from './WeatherWidget';
 import AIOrb from './AIOrb';
+import { useGeminiLiveAudio } from '@/hooks/useGeminiLiveAudio';
 import { Clock } from 'lucide-react';
 interface UnifiedHeaderProps {
   focused: boolean;
@@ -33,6 +34,7 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isConnected, isMuted } = useGeminiLiveAudio();
   const getCurrentTime = () => {
     return new Date().toLocaleTimeString([], {
       hour: '2-digit',
@@ -67,7 +69,13 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
     navigate(path);
   };
   return <div className="flex justify-center w-full p-6 md:p-8 py-[26px] fixed top-0 left-0 right-0 z-50">
-      <div className="bg-black/30 backdrop-blur-md border border-white/10 rounded-full shadow-2xl py-[4px] px-[4px]">
+      <div className={`
+        bg-black/30 backdrop-blur-md border rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500
+        ${isConnected && !isMuted 
+          ? 'border-ai-blue shadow-ai-blue/30 animate-ai-pulse-complex animate-border-bleed' 
+          : 'border-white/10'
+        }
+      `}>
         <div className="flex items-center space-x-2">
           {allItems.map((item, index) => {
           const isActive = item.type === 'nav' && 'path' in item && location.pathname === item.path;
