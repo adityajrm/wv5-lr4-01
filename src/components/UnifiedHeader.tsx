@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import WeatherWidget from './WeatherWidget';
+import AIOrb from './AIOrb';
 import { Clock } from 'lucide-react';
 interface UnifiedHeaderProps {
   focused: boolean;
@@ -20,7 +21,11 @@ type WeatherItem = {
   name: string;
   type: 'weather';
 };
-type HeaderItem = NavItem | TimeItem | WeatherItem;
+type AIItem = {
+  name: string;
+  type: 'ai';
+};
+type HeaderItem = NavItem | TimeItem | WeatherItem | AIItem;
 const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
   focused,
   focusedIndex,
@@ -54,11 +59,14 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
   }, {
     name: 'Weather',
     type: 'weather'
+  }, {
+    name: 'Atlas AI',
+    type: 'ai'
   }];
   const handleNavClick = (path: string) => {
     navigate(path);
   };
-  return <div className="flex justify-center w-full p-6 md:p-8 py-[26px]">
+  return <div className="flex justify-center w-full p-6 md:p-8 py-[26px] fixed top-0 left-0 right-0 z-50">
       <div className="bg-black/30 backdrop-blur-md border border-white/10 rounded-full shadow-2xl py-[4px] px-[4px]">
         <div className="flex items-center space-x-2">
           {allItems.map((item, index) => {
@@ -71,6 +79,9 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
                   `}>
                   <WeatherWidget onWeatherChange={onWeatherChange} />
                 </div>;
+          }
+          if (item.type === 'ai') {
+            return <AIOrb key="ai" focused={isFocused} />;
           }
           if (item.type === 'time') {
             return <div key="time" className={`

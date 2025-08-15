@@ -86,7 +86,7 @@ const Index = () => {
     movies.length,
     4, // Continue watching count
     4, // Updated carousel items count to 4
-    5  // Navigation items count (nav + time + weather)
+    6  // Navigation items count (nav + time + weather + ai)
   );
 
   // Make navigation available globally for carousel
@@ -106,6 +106,9 @@ const Index = () => {
           onWeatherChange={setWeatherCondition}
         />
       </header>
+
+      {/* Add top padding to account for fixed header */}
+      <div className="pt-24">
 
       {/* Hero Carousel Section */}
       <section 
@@ -155,29 +158,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Continue Watching Section */}
-      <section id="section-continue-watching" className="px-6 md:px-8 mb-12">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-6">Continue Watching</h2>
-          <div id="continue-watching-container" className="flex gap-4 overflow-x-auto pb-4">
-            {movies.slice(0, 4).map((movie, index) => (
-              <div key={index} className="relative flex-shrink-0">
-                <MovieCard 
-                  {...movie} 
-                  focused={navigation.currentSection === 'continue-watching' && navigation.focusedIndex === index}
-                  className="animate-fade-in" 
-                  style={{ animationDelay: `${index * 100}ms` }} 
-                />
-                <div className="absolute bottom-1 left-1 right-1">
-                  <div className="bg-psyco-green-DEFAULT h-1 rounded-full" style={{
-                    width: `${(index + 1) * 25}%`
-                  }}></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+       {/* Continue Watching Section */}
+       <section id="section-continue-watching" className="px-6 md:px-8 mb-12">
+         <div className="max-w-7xl mx-auto">
+           <h2 className="text-2xl font-bold text-white mb-6">Continue Watching</h2>
+           <div id="continue-watching-container" className="flex gap-4 overflow-x-auto pb-4">
+             {movies.slice(0, 4).map((movie, index) => (
+               <div key={index} className="relative flex-shrink-0">
+                 <MovieCard 
+                   {...movie} 
+                   focused={navigation.currentSection === 'continue-watching' && navigation.focusedIndex === index}
+                   className="animate-fade-in" 
+                   style={{ animationDelay: `${index * 100}ms` }} 
+                 />
+                 <div className="absolute bottom-1 left-1 right-1">
+                   <div className="bg-psyco-green-DEFAULT h-1 rounded-full" style={{
+                     width: `${(index + 1) * 25}%`
+                   }}></div>
+                 </div>
+               </div>
+             ))}
+           </div>
+         </div>
+       </section>
+      </div>
     </div>;
 };
 

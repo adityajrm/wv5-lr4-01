@@ -97,10 +97,6 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
             
-            {/* Global AI Orb - persists across all pages */}
-            <div className="fixed top-6 right-6 z-50">
-              <AIOrb />
-            </div>
 
             {/* Agentic Mode Overlay */}
             <AgenticModeOverlay
