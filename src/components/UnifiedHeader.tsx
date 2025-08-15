@@ -99,7 +99,7 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
                     ${isFocused ? 'bg-white/20 shadow-lg text-white' : 'hover:bg-white/10 hover:text-white'}
                   `}>
                   <Clock size={16} className="mr-2" />
-                  <span className="text-sm font-semibold whitespace-nowrap">
+                  <span className="font-semibold whitespace-nowrap text-sm">
                     {getCurrentTime()}
                   </span>
                 </div>;

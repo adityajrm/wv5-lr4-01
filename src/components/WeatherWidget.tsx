@@ -109,7 +109,7 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
   return <div className={`flex items-center space-x-3 text-gray-300 transition-all duration-300 ${focused ? 'ring-2 ring-psyco-green-DEFAULT rounded-lg p-2' : ''}`}>
       {getWeatherIcon(weather.condition)}
       <div className="flex flex-col">
-        <span className="text-lg font-medium text-white py-0">
+        <span className="text-white py-0 text-base font-medium">
           {weather.temperature}°C
         </span>
         
