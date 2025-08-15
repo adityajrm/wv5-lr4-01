@@ -34,7 +34,10 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isConnected, isMuted } = useGeminiLiveAudio();
+  const {
+    isConnected,
+    isMuted
+  } = useGeminiLiveAudio();
   const getCurrentTime = () => {
     return new Date().toLocaleTimeString([], {
       hour: '2-digit',
@@ -68,18 +71,13 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
   const handleNavClick = (path: string) => {
     navigate(path);
   };
-  return <div className="flex justify-center w-full p-6 md:p-8 py-[26px] fixed top-0 left-0 right-0 z-50">
+  return <div className="flex justify-center w-full p-6 md:p-8 fixed top-0 left-0 right-0 z-50 py-[25px]">
       <div className={`
         bg-black/30 backdrop-blur-md border rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500 overflow-hidden
-        ${isConnected && !isMuted 
-          ? 'border-ai-blue shadow-ai-blue/50 animate-ai-pulse-complex' 
-          : 'border-white/10'
-        }
+        ${isConnected && !isMuted ? 'border-ai-blue shadow-ai-blue/50 animate-ai-pulse-complex' : 'border-white/10'}
       `}>
         {/* Blue glow overlay when AI is active */}
-        {isConnected && !isMuted && (
-          <div className="absolute inset-0 rounded-full bg-ai-blue/10 animate-ai-glow-pulse"></div>
-        )}
+        {isConnected && !isMuted && <div className="absolute inset-0 rounded-full bg-ai-blue/10 animate-ai-glow-pulse"></div>}
         <div className="flex items-center space-x-2">
           {allItems.map((item, index) => {
           const isActive = item.type === 'nav' && 'path' in item && location.pathname === item.path;
