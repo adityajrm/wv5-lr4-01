@@ -46,11 +46,6 @@ const AIOrb: React.FC<AIOrbProps> = ({
     }
   };
 
-  const getConnectionStatus = () => {
-    if (!isConnected) return 'Connect';
-    if (isMuted) return 'Muted';
-    return 'Active';
-  };
 
   // Use focused prop or global focus state
   const isOrbFocused = focused || isFocused;
@@ -66,34 +61,25 @@ const AIOrb: React.FC<AIOrbProps> = ({
       id="ai-orb-button" 
       onClick={handleClick} 
       className={`
-        h-10 text-sm font-medium transition-all duration-300 rounded-full px-4 flex items-center whitespace-nowrap relative
+        h-10 text-sm font-medium transition-all duration-500 ease-out rounded-full px-4 flex items-center whitespace-nowrap relative overflow-hidden
         ${isOrbFocused ? 'bg-white text-black shadow-lg' : 'text-gray-300 hover:text-white hover:bg-white/10'}
         ${isConnected && !isMuted ? 'text-white bg-black/20' : ''}
       `}
     >
-      <span className="flex items-center gap-2">
-        <span>Atlas AI</span>
+      <div className="flex items-center gap-2 transition-all duration-500 ease-out">
+        <span className="transition-all duration-300">Atlas AI</span>
         
-        {/* Waveform Animation when active and not muted */}
-        {isConnected && !isMuted && (
-          <div className="flex items-center gap-0.5">
-            <div className="w-0.5 h-3 bg-ai-blue rounded-full animate-waveform"></div>
-            <div className="w-0.5 h-4 bg-ai-blue rounded-full animate-waveform-delayed"></div>
-            <div className="w-0.5 h-2 bg-ai-blue rounded-full animate-waveform-delayed-2"></div>
-            <div className="w-0.5 h-3 bg-ai-blue rounded-full animate-waveform"></div>
-          </div>
-        )}
-        
-        {/* Muted indicator */}
-        {isConnected && isMuted && (
-          <div className="relative">
-            <div className="w-4 h-3 border border-ai-muted rounded opacity-50"></div>
-            <div className="absolute top-1/2 left-1/2 w-5 h-0.5 bg-ai-muted transform -translate-x-1/2 -translate-y-1/2 rotate-45"></div>
-          </div>
-        )}
-        
-        {isConnected && <span className="text-xs">({getConnectionStatus()})</span>}
-      </span>
+        {/* Waveform Animation when active and not muted - smooth entrance/exit */}
+        <div className={`
+          flex items-center gap-0.5 transition-all duration-500 ease-out overflow-hidden
+          ${isConnected && !isMuted ? 'max-w-16 opacity-100' : 'max-w-0 opacity-0'}
+        `}>
+          <div className="w-0.5 h-3 bg-ai-blue rounded-full animate-waveform"></div>
+          <div className="w-0.5 h-4 bg-ai-blue rounded-full animate-waveform-delayed"></div>
+          <div className="w-0.5 h-2 bg-ai-blue rounded-full animate-waveform-delayed-2"></div>
+          <div className="w-0.5 h-3 bg-ai-blue rounded-full animate-waveform"></div>
+        </div>
+      </div>
     </button>
   );
 };

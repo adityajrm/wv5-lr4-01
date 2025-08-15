@@ -171,6 +171,16 @@ export default {
 						'border-image-source': 'linear-gradient(90deg, hsl(var(--ai-blue)) 100%, transparent 0%)',
 						'border-image-slice': '1'
 					}
+				},
+				'ai-glow-pulse': {
+					'0%, 100%': { 
+						opacity: '0.3',
+						transform: 'scale(1)'
+					},
+					'50%': { 
+						opacity: '0.6',
+						transform: 'scale(1.02)'
+					}
 				}
 			},
 			animation: {
@@ -191,7 +201,8 @@ export default {
 				'waveform-delayed': 'waveform 0.8s ease-in-out infinite 0.2s',
 				'waveform-delayed-2': 'waveform 0.7s ease-in-out infinite 0.4s',
 				'ai-pulse-complex': 'ai-pulse-complex 3s ease-in-out infinite',
-				'border-bleed': 'border-bleed 2s ease-in-out forwards'
+				'border-bleed': 'border-bleed 2s ease-in-out forwards',
+				'ai-glow-pulse': 'ai-glow-pulse 2s ease-in-out infinite'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'

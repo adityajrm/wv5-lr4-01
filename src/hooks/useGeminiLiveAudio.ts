@@ -104,12 +104,8 @@ export const useGeminiLiveAudio = (): UseGeminiLiveAudioReturn => {
     return () => clearInterval(interval);
   }, [isConnected, isMuted]);
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      geminiLiveService.disconnect();
-    };
-  }, []);
+  // Don't cleanup on unmount to persist across pages
+  // Users can manually disconnect by muting/clicking the AI button
 
   return {
     isConnected,

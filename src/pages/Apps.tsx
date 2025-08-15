@@ -48,7 +48,7 @@ const Apps = () => {
         />
       </header>
 
-      <div className="p-6 md:p-8">
+      <div className="p-6 md:p-8 pt-24 md:pt-28">
         <div className="mb-12">
           <h1 className="text-4xl font-bold text-white mb-2">All Apps</h1>
           <p className="text-gray-400">Choose your streaming platform</p>

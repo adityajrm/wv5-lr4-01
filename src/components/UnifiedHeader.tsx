@@ -70,12 +70,16 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
   };
   return <div className="flex justify-center w-full p-6 md:p-8 py-[26px] fixed top-0 left-0 right-0 z-50">
       <div className={`
-        bg-black/30 backdrop-blur-md border rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500
+        bg-black/30 backdrop-blur-md border rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500 overflow-hidden
         ${isConnected && !isMuted 
-          ? 'border-ai-blue shadow-ai-blue/30 animate-ai-pulse-complex animate-border-bleed' 
+          ? 'border-ai-blue shadow-ai-blue/50 animate-ai-pulse-complex' 
           : 'border-white/10'
         }
       `}>
+        {/* Blue glow overlay when AI is active */}
+        {isConnected && !isMuted && (
+          <div className="absolute inset-0 rounded-full bg-ai-blue/10 animate-ai-glow-pulse"></div>
+        )}
         <div className="flex items-center space-x-2">
           {allItems.map((item, index) => {
           const isActive = item.type === 'nav' && 'path' in item && location.pathname === item.path;

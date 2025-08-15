@@ -199,7 +199,7 @@ const Restaurant = () => {
       </header>
 
       {/* Main Content - 3 Column Layout */}
-      <div className="flex h-[calc(100vh-120px)]">
+      <div className="flex h-[calc(100vh-120px)] pt-20">
         {/* Left Section - Categories */}
         <div className="w-1/4 border-r border-gray-800 p-6">
           <h2 className="text-2xl font-bold mb-6">Categories</h2>
