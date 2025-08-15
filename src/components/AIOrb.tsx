@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useGeminiLiveAudio } from '@/hooks/useGeminiLiveAudio';
 import { useAIOrbFocus } from '@/hooks/useAIOrbFocus';
-
 interface AIOrbProps {
   focused?: boolean;
   onClick?: () => void;
 }
-
 const AIOrb: React.FC<AIOrbProps> = ({
   focused = false,
   onClick
@@ -34,7 +32,6 @@ const AIOrb: React.FC<AIOrbProps> = ({
       window.removeEventListener('aiOrb:mute', handleMuteEvent);
     };
   }, [mute]);
-
   const handleClick = async () => {
     onClick?.();
     if (!isConnected) {
@@ -46,7 +43,6 @@ const AIOrb: React.FC<AIOrbProps> = ({
     }
   };
 
-
   // Use focused prop or global focus state
   const isOrbFocused = focused || isFocused;
   useEffect(() => {
@@ -55,19 +51,13 @@ const AIOrb: React.FC<AIOrbProps> = ({
       setFocused(focused);
     }
   }, [focused, isFocused, setFocused]);
-
-  return (
-    <button 
-      id="ai-orb-button" 
-      onClick={handleClick} 
-      className={`
+  return <button id="ai-orb-button" onClick={handleClick} className={`
         h-10 text-sm font-medium transition-all duration-500 ease-out rounded-full px-4 flex items-center whitespace-nowrap relative overflow-hidden
         ${isOrbFocused ? 'bg-white text-black shadow-lg' : 'text-gray-300 hover:text-white hover:bg-white/10'}
         ${isConnected && !isMuted ? 'text-white bg-black/20' : ''}
-      `}
-    >
+      `}>
       <div className="flex items-center gap-2 transition-all duration-500 ease-out">
-        <span className="transition-all duration-300">Atlas AI</span>
+        <span className="transition-all duration-300 font-bold text-xs text-indigo-500">ATLAS AI</span>
         
         {/* Waveform Animation when active and not muted - smooth entrance/exit */}
         <div className={`
@@ -80,7 +70,6 @@ const AIOrb: React.FC<AIOrbProps> = ({
           <div className="w-0.5 h-3 bg-ai-blue rounded-full animate-waveform"></div>
         </div>
       </div>
-    </button>
-  );
+    </button>;
 };
 export default AIOrb;
