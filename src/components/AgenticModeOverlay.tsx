@@ -123,8 +123,8 @@ const AgenticModeOverlay: React.FC<AgenticModeOverlayProps> = ({
     }
   };
   if (!isOpen) return null;
-  return <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm">
-      <div className="absolute inset-0 flex items-end justify-center">
+  return <div className="fixed inset-0 z-40 bg-black/90 backdrop-blur-sm">
+      <div className="absolute inset-0 flex items-end justify-center px-[30px]">
         <div ref={overlayRef} className="bg-zinc-900 rounded-t-2xl shadow-2xl w-full max-w-6xl h-[88vh] overflow-hidden border-t border-l border-r border-zinc-700 focus:outline-none flex flex-col" tabIndex={0} onKeyDown={handleKeyDown}>
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-zinc-700 flex-shrink-0 py-[9px]">

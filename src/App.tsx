@@ -14,7 +14,10 @@ import Booking from "./pages/Booking";
 import NotFound from "./pages/NotFound";
 import AIOrb from "./components/AIOrb";
 import AgenticModeOverlay from "./components/AgenticModeOverlay";
+import UnifiedHeader from "./components/UnifiedHeader";
+import WeatherBackground from "./components/WeatherBackground";
 import { useAgenticMode } from "./hooks/useAgenticMode";
+import { useUniversalNavigation, NavigationContext } from "./hooks/useUniversalNavigation";
 
 const queryClient = new QueryClient();
 
@@ -77,35 +80,48 @@ const AIGlobalState = () => {
 
 const App = () => {
   const agenticMode = useAgenticMode();
+  const navigation = useUniversalNavigation();
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <BrowserRouter>
-          <NavigationEventListener />
-          <AIGlobalState />
-          <main className="min-h-screen bg-black">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/apps" element={<Apps />} />
-              <Route path="/restaurant" element={<Restaurant />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/booking" element={<Booking />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogDetail />} />
-              <Route path="/references" element={<References />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+          <NavigationContext.Provider value={navigation}>
+            <NavigationEventListener />
+            <AIGlobalState />
             
-
-            {/* Agentic Mode Overlay */}
-            <AgenticModeOverlay
-              isOpen={agenticMode.isOpen}
-              onClose={agenticMode.closeAgenticMode}
-              task={agenticMode.task}
-              contentType={agenticMode.contentType}
+            {/* Universal Weather Background */}
+            <WeatherBackground condition={navigation.weatherCondition} />
+            
+            {/* Universal Header - Always visible */}
+            <UnifiedHeader 
+              focused={navigation.currentSection === 'nav'}
+              focusedIndex={navigation.focusedIndex}
+              onWeatherChange={navigation.setWeatherCondition}
             />
-          </main>
+            
+            <main className="min-h-screen bg-black pt-24">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/apps" element={<Apps />} />
+                <Route path="/restaurant" element={<Restaurant />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/booking" element={<Booking />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogDetail />} />
+                <Route path="/references" element={<References />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              
+              {/* Agentic Mode Overlay */}
+              <AgenticModeOverlay
+                isOpen={agenticMode.isOpen}
+                onClose={agenticMode.closeAgenticMode}
+                task={agenticMode.task}
+                contentType={agenticMode.contentType}
+              />
+            </main>
+          </NavigationContext.Provider>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

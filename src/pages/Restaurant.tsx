@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Clock, Minus, Plus, ShoppingCart } from "lucide-react";
 import { useRestaurantNavigation } from "@/hooks/useRestaurantNavigation";
-import UnifiedHeader from "@/components/UnifiedHeader";
-import WeatherBackground from "@/components/WeatherBackground";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -128,17 +126,9 @@ const Restaurant = () => {
     setRoomNumber("");
     setIsOrderDialogOpen(false);
   };
-  return <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Weather Background Animations */}
-      <WeatherBackground condition={weatherCondition} />
-      
-      {/* Unified Header */}
-      <header>
-        <UnifiedHeader focused={navigation.currentSection === 'nav'} focusedIndex={navigation.focusedIndex} onWeatherChange={setWeatherCondition} />
-      </header>
-
+  return <div className="min-h-screen bg-transparent text-white overflow-hidden">
       {/* Main Content - 3 Column Layout */}
-      <div className="flex h-[calc(100vh-120px)] pt-20 py-0 my-[40px]">
+      <div className="flex h-[calc(100vh-120px)] pt-4 py-0 my-[40px]">
         {/* Left Section - Categories */}
         <div className="w-1/4 border-r border-gray-800 p-6">
           <h2 className="text-2xl font-bold mb-6">Categories</h2>

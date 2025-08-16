@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import TVCarousel from "@/components/TVCarousel";
 import TVAppCard from "@/components/TVAppCard";
 import MovieCard from "@/components/MovieCard";
-import WeatherWidget from "@/components/WeatherWidget";
-import WeatherBackground from "@/components/WeatherBackground";
-import UnifiedHeader from "@/components/UnifiedHeader";
 import { useKeyboardNavigation } from "@/hooks/useKeyboardNavigation";
 
 // Import images
@@ -94,21 +91,8 @@ const Index = () => {
     (window as any).currentNavigation = navigation;
   }, [navigation]);
 
-  return <div className="min-h-screen bg-black text-white relative">
-      {/* Weather Background Animations */}
-      <WeatherBackground condition={weatherCondition} />
-      
-      {/* Unified Header */}
-      <header>
-        <UnifiedHeader 
-          focused={navigation.currentSection === 'nav'}
-          focusedIndex={navigation.focusedIndex}
-          onWeatherChange={setWeatherCondition}
-        />
-      </header>
-
-      {/* Add top padding to account for fixed header */}
-      <div className="pt-24">
+  return <div className="min-h-screen bg-transparent text-white relative">
+      <div className="pt-8">
 
       {/* Hero Carousel Section */}
       <section 

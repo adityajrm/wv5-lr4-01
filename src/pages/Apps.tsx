@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TVAppCard from "@/components/TVAppCard";
 import { useKeyboardNavigation } from "@/hooks/useKeyboardNavigation";
-import UnifiedHeader from "@/components/UnifiedHeader";
-import WeatherBackground from "@/components/WeatherBackground";
 
 // Import images
 import netflixIcon from "@/assets/netflix-icon.jpg";
@@ -35,20 +33,8 @@ const Apps = () => {
   const navigation = useKeyboardNavigation(streamingApps.length, 0, 0, 0, 5); // 5 nav items (nav + time + weather)
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
-      {/* Weather Background Animations */}
-      <WeatherBackground condition={weatherCondition} />
-      
-      {/* Unified Header */}
-      <header>
-        <UnifiedHeader 
-          focused={navigation.currentSection === 'nav'}
-          focusedIndex={navigation.focusedIndex}
-          onWeatherChange={setWeatherCondition}
-        />
-      </header>
-
-      <div className="p-6 md:p-8 pt-32 md:pt-32 max-w-full overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-white relative overflow-x-hidden">
+      <div className="p-6 md:p-8 pt-8 max-w-full overflow-x-hidden">
         <div className="mb-12 max-w-6xl mx-auto">
           <h1 className="text-4xl font-bold text-white mb-2">All Apps</h1>
           <p className="text-gray-400">Choose your streaming platform</p>

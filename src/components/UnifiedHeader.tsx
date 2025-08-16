@@ -71,21 +71,21 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
   const handleNavClick = (path: string) => {
     navigate(path);
   };
-  return <div className="flex justify-center w-full p-6 md:p-8 fixed top-0 left-0 right-0 z-50 py-[25px]">
+  return <div className="flex justify-center w-full p-6 md:p-8 fixed top-0 left-0 right-0 z-[60] py-[25px]">
       <div className={`
         bg-black/30 backdrop-blur-md border rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500 overflow-hidden
         ${isConnected && !isMuted ? 'border-ai-blue shadow-ai-blue/50 animate-ai-pulse-complex animate-border-bleed' : 'border-white/10'}
       `}>
         {/* Blue glow overlay when AI is active */}
         {isConnected && !isMuted && <div className="absolute inset-0 rounded-full bg-ai-blue/10 animate-ai-glow-pulse"></div>}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 transition-all duration-500 ease-out">
           {allItems.map((item, index) => {
           const isActive = item.type === 'nav' && 'path' in item && location.pathname === item.path;
           const isFocused = focused && focusedIndex === index;
           if (item.type === 'weather') {
             return <div key="weather" className={`
                     h-10 flex items-center transition-all duration-500 ease-out rounded-full px-3 transform
-                    ${isFocused ? 'bg-white/20 shadow-lg scale-105' : 'hover:bg-white/10 scale-100'}
+                    ${isFocused ? 'bg-white/20 shadow-lg scale-105 translate-x-1' : 'hover:bg-white/10 scale-100 translate-x-0'}
                   `}>
                   <WeatherWidget onWeatherChange={onWeatherChange} />
                 </div>;
@@ -96,7 +96,7 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
           if (item.type === 'time') {
             return <div key="time" className={`
                     h-10 flex items-center text-gray-300 transition-all duration-500 ease-out rounded-full px-3 transform
-                    ${isFocused ? 'bg-white/20 shadow-lg text-white scale-105' : 'hover:bg-white/10 hover:text-white scale-100'}
+                    ${isFocused ? 'bg-white/20 shadow-lg text-white scale-105 translate-x-1' : 'hover:bg-white/10 hover:text-white scale-100 translate-x-0'}
                   `}>
                   <Clock size={16} className="mr-2" />
                   <span className="font-semibold whitespace-nowrap text-sm">
@@ -109,7 +109,7 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
           if (item.type === 'nav') {
             return <button key={item.path} onClick={() => handleNavClick(item.path)} className={`
                     h-10 text-sm font-medium transition-all duration-500 ease-out rounded-full px-4 flex items-center whitespace-nowrap transform
-                    ${isActive ? 'bg-white text-black shadow-lg scale-105' : isFocused ? 'bg-gray-600 text-white shadow-lg scale-105' : 'text-gray-300 hover:text-white hover:bg-white/10 scale-100'}
+                    ${isActive ? 'bg-white text-black shadow-lg scale-105 translate-x-1' : isFocused ? 'bg-gray-600 text-white shadow-lg scale-105 translate-x-1' : 'text-gray-300 hover:text-white hover:bg-white/10 scale-100 translate-x-0'}
                   `}>
                   {item.name}
                 </button>;
