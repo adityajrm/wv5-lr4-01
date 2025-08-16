@@ -94,64 +94,61 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
         )}
         <div className={`
           flex items-center transition-all duration-700 ease-out
-          ${isConnected && !isMuted ? 'space-x-0' : 'space-x-2'}
+          ${isConnected && !isMuted ? 'w-full' : 'space-x-2'}
         `}>
-          {allItems.map((item, index) => {
-          const isActive = item.type === 'nav' && 'path' in item && location.pathname === item.path;
-          const isFocused = focused && focusedIndex === index;
-          const isAIExpanded = isConnected && !isMuted;
-          const isNonAIItem = item.type !== 'ai';
-          
-          if (item.type === 'weather') {
-            return <div key="weather" className={`
-                    h-10 flex items-center transition-all duration-700 ease-out rounded-full px-3 transform
-                    ${isAIExpanded ? 'opacity-0 scale-75 pointer-events-none w-0 px-0 overflow-hidden' : 
-                      isFocused ? 'bg-white/20 shadow-lg scale-105 translate-x-1 opacity-100' : 'hover:bg-white/10 scale-100 translate-x-0 opacity-100'}
-                  `}>
-                  <WeatherWidget onWeatherChange={onWeatherChange} />
-                </div>;
-          }
-          
-          if (item.type === 'ai') {
-            return <div key="ai" className={`
-                    transition-all duration-700 ease-out
-                    ${isAIExpanded ? 'flex-1' : 'flex-none'}
-                  `}>
-                  <AIOrb focused={isFocused} />
-                </div>;
-          }
-          
-          if (item.type === 'time') {
-            return <div key="time" className={`
-                    h-10 flex items-center text-gray-300 transition-all duration-700 ease-out rounded-full px-3 transform
-                    ${isAIExpanded ? 'opacity-0 scale-75 pointer-events-none w-0 px-0 overflow-hidden' : 
-                      isFocused ? 'bg-white/20 shadow-lg text-white scale-105 translate-x-1 opacity-100' : 'hover:bg-white/10 hover:text-white scale-100 translate-x-0 opacity-100'}
-                  `}>
-                  <Clock size={16} className="mr-2" />
-                  <span className="font-semibold whitespace-nowrap text-sm">
-                    {getCurrentTime()}
-                  </span>
-                </div>;
-          }
+          {isConnected && !isMuted ? (
+            // Only show AI button when expanded
+            <div className="w-full">
+              <AIOrb focused={focused && focusedIndex === allItems.findIndex(item => item.type === 'ai')} />
+            </div>
+          ) : (
+            // Show all buttons when AI is not active
+            allItems.map((item, index) => {
+              const isActive = item.type === 'nav' && 'path' in item && location.pathname === item.path;
+              const isFocused = focused && focusedIndex === index;
+              
+              if (item.type === 'weather') {
+                return <div key="weather" className={`
+                        h-10 flex items-center transition-all duration-500 ease-out rounded-full px-3 transform
+                        ${isFocused ? 'bg-white/20 shadow-lg scale-105 translate-x-1' : 'hover:bg-white/10 scale-100 translate-x-0'}
+                      `}>
+                      <WeatherWidget onWeatherChange={onWeatherChange} />
+                    </div>;
+              }
+              
+              if (item.type === 'ai') {
+                return <AIOrb key="ai" focused={isFocused} />;
+              }
+              
+              if (item.type === 'time') {
+                return <div key="time" className={`
+                        h-10 flex items-center text-gray-300 transition-all duration-500 ease-out rounded-full px-3 transform
+                        ${isFocused ? 'bg-white/20 shadow-lg text-white scale-105 translate-x-1' : 'hover:bg-white/10 hover:text-white scale-100 translate-x-0'}
+                      `}>
+                      <Clock size={16} className="mr-2" />
+                      <span className="font-semibold whitespace-nowrap text-sm">
+                        {getCurrentTime()}
+                      </span>
+                    </div>;
+              }
 
-          // Navigation items - must be nav type here
-          if (item.type === 'nav') {
-            return <button 
-                    key={item.path} 
-                    onClick={() => !isAIExpanded && handleNavClick(item.path, index)} 
-                    disabled={isAIExpanded}
-                    className={`
-                    h-10 text-sm font-medium transition-all duration-700 ease-out rounded-full px-4 flex items-center whitespace-nowrap transform
-                    ${isAIExpanded ? 'opacity-0 scale-75 pointer-events-none w-0 px-0 overflow-hidden' : 
-                      isActive ? 'bg-white text-black shadow-lg scale-105 translate-x-1 opacity-100' : 
-                      isFocused ? 'bg-gray-600 text-white shadow-lg scale-105 translate-x-1 opacity-100' : 
-                      'text-gray-300 hover:text-white hover:bg-white/10 scale-100 translate-x-0 opacity-100'}
-                  `}>
-                  {item.name}
-                </button>;
-          }
-          return null;
-        })}
+              // Navigation items
+              if (item.type === 'nav') {
+                return <button 
+                        key={item.path} 
+                        onClick={() => handleNavClick(item.path, index)} 
+                        className={`
+                        h-10 text-sm font-medium transition-all duration-500 ease-out rounded-full px-4 flex items-center whitespace-nowrap transform
+                        ${isActive ? 'bg-white text-black shadow-lg scale-105 translate-x-1' : 
+                          isFocused ? 'bg-gray-600 text-white shadow-lg scale-105 translate-x-1' : 
+                          'text-gray-300 hover:text-white hover:bg-white/10 scale-100 translate-x-0'}
+                      `}>
+                      {item.name}
+                    </button>;
+              }
+              return null;
+            })
+          )}
         </div>
       </div>
     </div>;
