@@ -18,6 +18,12 @@ import grilledSalmon from "@/assets/food/grilled-salmon.jpg";
 import chickenAlfredo from "@/assets/food/chicken-alfredo.jpg";
 import chocolateLavaCake from "@/assets/food/chocolate-lava-cake.jpg";
 import beefBurger from "@/assets/food/beef-burger.jpg";
+import pepperoniPizza from "@/assets/food/pepperoni-pizza.jpg";
+import greekSalad from "@/assets/food/greek-salad.jpg";
+import mushroomRisotto from "@/assets/food/mushroom-risotto.jpg";
+import cheeseburger from "@/assets/food/cheeseburger.jpg";
+import tiramisu from "@/assets/food/tiramisu.jpg";
+import { restaurantService } from "@/services/restaurantService";
 interface MenuItem {
   id: string;
   name: string;
@@ -42,56 +48,8 @@ const Restaurant = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const menuItems: MenuItem[] = [{
-    id: "1",
-    name: "Margherita Pizza",
-    description: "Fresh tomato sauce, mozzarella, basil",
-    price: 18.99,
-    category: "Pizza",
-    time: "15-20 min",
-    image: margheritaPizza
-  }, {
-    id: "2",
-    name: "Caesar Salad",
-    description: "Romaine lettuce, parmesan, croutons, caesar dressing",
-    price: 12.99,
-    category: "Salads",
-    time: "5-10 min",
-    image: caesarSalad
-  }, {
-    id: "3",
-    name: "Grilled Salmon",
-    description: "Atlantic salmon with lemon herb seasoning",
-    price: 24.99,
-    category: "Main Course",
-    time: "20-25 min",
-    image: grilledSalmon
-  }, {
-    id: "4",
-    name: "Chicken Alfredo",
-    description: "Fettuccine pasta with grilled chicken in cream sauce",
-    price: 19.99,
-    category: "Pasta",
-    time: "15-20 min",
-    image: chickenAlfredo
-  }, {
-    id: "5",
-    name: "Chocolate Lava Cake",
-    description: "Warm chocolate cake with molten center",
-    price: 8.99,
-    category: "Dessert",
-    time: "10-15 min",
-    image: chocolateLavaCake
-  }, {
-    id: "6",
-    name: "Beef Burger",
-    description: "Angus beef patty with lettuce, tomato, onion",
-    price: 16.99,
-    category: "Burgers",
-    time: "12-18 min",
-    image: beefBurger
-  }];
-  const categories = ["Pizza", "Salads", "Main Course", "Pasta", "Burgers", "Dessert", "Appetizers"];
+  const menuItems: MenuItem[] = restaurantService.getMenu();
+  const categories = restaurantService.getCategories();
   const filteredItems = menuItems; // Show all items continuously
 
   // Initialize keyboard navigation
