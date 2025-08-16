@@ -211,7 +211,7 @@ const functionDeclarations = [
   },
   {
     name: "add_item_to_order",
-    description: "Add a NEW menu item to the current order. Only use this for items NOT already in the order.",
+    description: "Add a menu item to the current order. Use this to add new items or increase quantity of existing items.",
     parameters: {
       type: Type.OBJECT,
       properties: {
@@ -229,13 +229,13 @@ const functionDeclarations = [
   },
   {
     name: "remove_item_from_order",
-    description: "Remove a menu item from the current order",
+    description: "COMPLETELY remove a menu item from the current order. This will remove ALL quantities of the specified item from the cart.",
     parameters: {
       type: Type.OBJECT,
       properties: {
         itemName: {
           type: Type.STRING,
-          description: "The exact name of the menu item to remove"
+          description: "The exact name of the menu item to completely remove from order"
         }
       },
       required: ["itemName"]
@@ -243,7 +243,7 @@ const functionDeclarations = [
   },
   {
     name: "update_item_quantity",
-    description: "Update/change the quantity of an existing item already in the order. Use this when user wants to modify quantity (e.g., 'change to 1', 'make it 3', 'reduce to 2').",
+    description: "Change the quantity of an existing item in the order to a specific number. Use this when user wants to set a specific quantity (e.g., 'change to 2', 'make it 3', 'set quantity to 1'). This replaces the current quantity with the new one.",
     parameters: {
       type: Type.OBJECT,
       properties: {
@@ -253,7 +253,7 @@ const functionDeclarations = [
         },
         quantity: {
           type: Type.NUMBER,
-          description: "New quantity for the item (will replace current quantity)"
+          description: "The new quantity to set (will completely replace current quantity). Use 0 to remove the item."
         }
       },
       required: ["itemName", "quantity"]
@@ -339,17 +339,17 @@ const functionDeclarations = [
   // Agentic Mode Function
   {
     name: "activate_agentic_mode",
-    description: "Activate agentic mode to generate detailed content like letters, documents, suggestions, or any written content based on user request",
+    description: "Activate agentic mode to generate any text-based content including letters, documents, lists, comparisons, tables, research, reports, essays, summaries, plans, or any written material based on user request",
     parameters: {
       type: Type.OBJECT,
       properties: {
         task: {
           type: Type.STRING,
-          description: "The specific task or request from the user (e.g., 'Write a letter to the Manager requesting 2 days holiday', 'Generate a business proposal', 'Create a shopping list')"
+          description: "The specific task or request from the user (e.g., 'Write a letter to the Manager requesting 2 days holiday', 'Create a comparison table of smartphones', 'Generate a list of top restaurants', 'Research renewable energy options', 'Write a business proposal')"
         },
         contentType: {
           type: Type.STRING,
-          description: "Type of content to generate (e.g., 'letter', 'document', 'list', 'suggestion', 'report')"
+          description: "Type of content to generate (e.g., 'letter', 'document', 'list', 'comparison', 'table', 'research', 'report', 'essay', 'summary', 'plan')"
         }
       },
       required: ["task", "contentType"]
