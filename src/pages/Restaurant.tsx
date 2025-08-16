@@ -69,16 +69,26 @@ const Restaurant = () => {
     }
   };
   const updateQuantity = (id: string, change: number) => {
-    setOrderItems(orderItems.map(item => {
-      if (item.id === id) {
-        const newQuantity = item.quantity + change;
-        return newQuantity > 0 ? {
-          ...item,
-          quantity: newQuantity
-        } : item;
-      }
-      return item;
-    }).filter(item => item.quantity > 0));
+    setOrderItems(prevItems => {
+      const updatedItems = prevItems.map(item => {
+        if (item.id === id) {
+          const newQuantity = item.quantity + change;
+          return {
+            ...item,
+            quantity: Math.max(0, newQuantity) // Ensure quantity never goes below 0
+          };
+        }
+        return item;
+      }).filter(item => item.quantity > 0); // Remove items with 0 quantity
+      
+      return updatedItems;
+    });
+  };
+
+  const removeItemFromOrder = (id: string) => {
+    setOrderItems(prevItems => prevItems.filter(item => item.id !== id));
+    // Also call the service method for proper integration
+    restaurantService.removeItemFromOrder(menuItems.find(item => item.id === id)?.name || '');
   };
   const updateSpecialInstructions = (id: string, instructions: string) => {
     setOrderItems(orderItems.map(item => item.id === id ? {
