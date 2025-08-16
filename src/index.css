@@ -1,5 +1,3 @@
-
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
@@ -93,7 +91,58 @@
   }
 }
 
-@layer utilities {
-  /* Remove all scrollbar utilities since we're hiding them globally */
+/* AI header/Orb animations and helpers (moved from UnifiedHeader runtime injection) */
+@keyframes ai-horizontal-pulse {
+  0% { transform: translateX(-30px); opacity: 0.85; }
+  50% { transform: translateX(30px); opacity: 1; }
+  100% { transform: translateX(-30px); opacity: 0.85; }
 }
+.animate-ai-horizontal-pulse {
+  animation: ai-horizontal-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ai-glow-pulse {
+  0% { opacity: 0.10; transform: scale(1); }
+  40% { opacity: 0.22; transform: scale(1.02); }
+  60% { opacity: 0.28; transform: scale(1.01); }
+  100% { opacity: 0.10; transform: scale(1); }
+}
+.animate-ai-glow-pulse {
+  animation: ai-glow-pulse 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes ai-pulse-shadow {
+  0% {
+    box-shadow: 0 0 12px rgba(0,180,255,0.12), inset 0 0 6px rgba(0,180,255,0.04);
+  }
+  50% {
+    box-shadow: 0 0 64px rgba(0,160,240,0.36), inset 0 0 18px rgba(0,160,240,0.10);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(0,180,255,0.12), inset 0 0 6px rgba(0,180,255,0.04);
+  }
+}
+.animate-ai-pulse-complex {
+  animation: ai-pulse-shadow 2.5s ease-in-out infinite;
+}
+
+/* Waveform animations used inside AI orb */
+@keyframes waveform-grow {
+  0% { transform: scaleY(0.6); opacity: 0.6; }
+  50% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0.7); opacity: 0.7; }
+}
+.animate-waveform { animation: waveform-grow 600ms ease-in-out infinite; transform-origin: bottom; }
+.animate-waveform-delayed { animation: waveform-grow 700ms ease-in-out infinite; animation-delay: 120ms; transform-origin: bottom; }
+.animate-waveform-delayed-2 { animation: waveform-grow 820ms ease-in-out infinite; animation-delay: 240ms; transform-origin: bottom; }
+
+/* Small helper for navbar glow shadow */
+.shadow-ai-glow { box-shadow: 0 6px 40px rgba(0,160,240,0.18); }
+
+/* Ensure unified-header ai-active increases visibility (optional tuning) */
+.unified-header.ai-active { /* keep layout unchanged; visuals handled by inner overlays */ }
+
+/* Utility to ensure the glow overlay isn't clipped */
+.unified-header { overflow: visible; }
 
