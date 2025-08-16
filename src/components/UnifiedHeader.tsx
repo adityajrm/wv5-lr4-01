@@ -73,19 +73,20 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
     localStorage.setItem('header-focus-index', index.toString());
     navigate(path);
   };
-  return <div className="flex justify-center w-full p-6 md:p-8 fixed top-0 left-0 right-0 z-[60] py-[25px]">
+  return <div className={`flex justify-center w-full p-6 md:p-8 fixed top-0 left-0 right-0 z-[60] py-[25px] transition-all duration-500 ${isConnected && !isMuted ? 'drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]' : ''}`}>
       {/* Enhanced blue glow background when AI is active */}
       {isConnected && !isMuted && (
         <div className="absolute inset-0 flex justify-center items-start pt-6 md:pt-8">
-          <div className="w-full max-w-fit h-12 bg-ai-blue/20 blur-xl rounded-full animate-pulse"></div>
+          <div className="w-full max-w-fit h-16 bg-ai-blue/30 blur-2xl rounded-full animate-pulse"></div>
+          <div className="absolute w-full max-w-fit h-20 bg-ai-blue/20 blur-3xl rounded-full animate-pulse"></div>
         </div>
       )}
       <div className={`
-        bg-black/30 backdrop-blur-md border rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500 overflow-hidden
-        ${isConnected && !isMuted ? 'border-ai-blue border-2 shadow-ai-blue/70 shadow-2xl ring-2 ring-ai-blue/30 animate-ai-pulse-complex animate-border-bleed' : 'border-white/10'}
+        bg-black/30 backdrop-blur-md border-2 rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500 overflow-hidden
+        ${isConnected && !isMuted ? 'border-ai-blue shadow-ai-blue/80 shadow-2xl ring-4 ring-ai-blue/40 animate-pulse' : 'border-white/10'}
       `}>
         {/* Blue glow overlay when AI is active */}
-        {isConnected && !isMuted && <div className="absolute inset-0 rounded-full bg-ai-blue/10 animate-ai-glow-pulse"></div>}
+        {isConnected && !isMuted && <div className="absolute inset-0 rounded-full bg-ai-blue/20 animate-pulse"></div>}
         <div className="flex items-center space-x-2 transition-all duration-500 ease-out">
           {allItems.map((item, index) => {
           const isActive = item.type === 'nav' && 'path' in item && location.pathname === item.path;
