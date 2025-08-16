@@ -35,7 +35,7 @@ const Apps = () => {
   const navigation = useKeyboardNavigation(streamingApps.length, 0, 0, 0, 5); // 5 nav items (nav + time + weather)
 
   return (
-    <div className="min-h-screen bg-black text-white relative">
+    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
       {/* Weather Background Animations */}
       <WeatherBackground condition={weatherCondition} />
       
@@ -48,15 +48,15 @@ const Apps = () => {
         />
       </header>
 
-      <div className="p-6 md:p-8 pt-24 md:pt-28">
-        <div className="mb-12">
+      <div className="p-6 md:p-8 pt-32 md:pt-32 max-w-full overflow-x-hidden">
+        <div className="mb-12 max-w-6xl mx-auto">
           <h1 className="text-4xl font-bold text-white mb-2">All Apps</h1>
           <p className="text-gray-400">Choose your streaming platform</p>
         </div>
 
         {/* Apps Grid */}
-        <section id="section-apps" className="max-w-6xl mx-auto">
-          <div id="apps-container" className="grid grid-cols-3 gap-6 md:gap-8">
+        <section id="section-apps" className="max-w-6xl mx-auto w-full">
+          <div id="apps-container" className="grid grid-cols-3 gap-6 md:gap-8 w-full max-w-full">
             {streamingApps.map((app, index) => (
               <TVAppCard 
                 key={index} 
@@ -64,7 +64,7 @@ const Apps = () => {
                 icon={app.icon}
                 url={app.url}
                 focused={navigation.currentSection === 'apps' && navigation.focusedIndex === index}
-                className="animate-fade-in" 
+                className="animate-fade-in w-full" 
                 style={{ animationDelay: `${index * 100}ms` }} 
               />
             ))}

@@ -204,7 +204,7 @@ const AgenticModeOverlay: React.FC<AgenticModeOverlayProps> = ({
           {/* Content */}
           <div 
             ref={contentRef}
-            className="flex-1 overflow-y-auto px-8 py-6"
+            className="flex-1 overflow-y-auto px-12 py-8"
           >
             {loading ? (
               <div className="flex items-center justify-center h-full">

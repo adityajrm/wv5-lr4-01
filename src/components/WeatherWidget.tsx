@@ -17,41 +17,20 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchDefaultWeather = async (API_KEY: string) => {
-      try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${API_KEY}&units=metric`);
-        if (response.ok) {
-          const data = await response.json();
-
-          // Map weather conditions to our types
-          const mapCondition = (weatherCode: number): WeatherData['condition'] => {
-            if (weatherCode >= 200 && weatherCode < 300) return 'stormy';
-            if (weatherCode >= 300 && weatherCode < 600) return 'rainy';
-            if (weatherCode >= 600 && weatherCode < 700) return 'snowy';
-            if (weatherCode >= 700 && weatherCode < 800) return 'cloudy';
-            if (weatherCode === 800) return 'sunny';
-            return 'cloudy';
-          };
-          setWeather({
-            temperature: Math.round(data.main.temp),
-            condition: mapCondition(data.weather[0].id),
-            description: data.weather[0].description,
-            location: data.name
-          });
-        }
-      } catch (error) {
-        console.error('Weather fetch failed:', error);
-        // Fallback to mock data
-        setWeather({
-          temperature: 22,
-          condition: 'sunny',
-          description: 'Clear sky',
-          location: 'Your City'
-        });
-      }
-      setLoading(false);
-    };
     const fetchWeather = async () => {
+      // Check if we have cached weather data
+      const cachedWeather = localStorage.getItem('weatherData');
+      const cacheTimestamp = localStorage.getItem('weatherTimestamp');
+      const now = Date.now();
+      const thirtyMinutes = 30 * 60 * 1000; // 30 minutes in milliseconds
+
+      if (cachedWeather && cacheTimestamp && (now - parseInt(cacheTimestamp)) < thirtyMinutes) {
+        // Use cached data
+        setWeather(JSON.parse(cachedWeather));
+        setLoading(false);
+        return;
+      }
+
       try {
         // Mock weather data since API key is invalid
         const mockWeatherData = {
@@ -60,15 +39,25 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
           description: 'Clear sky',
           location: 'Your City'
         };
+        
+        // Cache the data
+        localStorage.setItem('weatherData', JSON.stringify(mockWeatherData));
+        localStorage.setItem('weatherTimestamp', now.toString());
+        
         setWeather(mockWeatherData);
         setLoading(false);
-        return;
       } catch (error) {
         console.error('Weather fetch failed:', error);
         setLoading(false);
       }
     };
+
     fetchWeather();
+
+    // Set up interval to refetch every 30 minutes
+    const interval = setInterval(fetchWeather, 30 * 60 * 1000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   // Notify parent when weather changes

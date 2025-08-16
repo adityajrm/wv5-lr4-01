@@ -84,8 +84,8 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
           const isFocused = focused && focusedIndex === index;
           if (item.type === 'weather') {
             return <div key="weather" className={`
-                    h-10 flex items-center transition-all duration-300 rounded-full px-3
-                    ${isFocused ? 'bg-white/20 shadow-lg' : 'hover:bg-white/10'}
+                    h-10 flex items-center transition-all duration-500 ease-out rounded-full px-3 transform
+                    ${isFocused ? 'bg-white/20 shadow-lg scale-105' : 'hover:bg-white/10 scale-100'}
                   `}>
                   <WeatherWidget onWeatherChange={onWeatherChange} />
                 </div>;
@@ -95,8 +95,8 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
           }
           if (item.type === 'time') {
             return <div key="time" className={`
-                    h-10 flex items-center text-gray-300 transition-all duration-300 rounded-full px-3
-                    ${isFocused ? 'bg-white/20 shadow-lg text-white' : 'hover:bg-white/10 hover:text-white'}
+                    h-10 flex items-center text-gray-300 transition-all duration-500 ease-out rounded-full px-3 transform
+                    ${isFocused ? 'bg-white/20 shadow-lg text-white scale-105' : 'hover:bg-white/10 hover:text-white scale-100'}
                   `}>
                   <Clock size={16} className="mr-2" />
                   <span className="font-semibold whitespace-nowrap text-sm">
@@ -108,8 +108,8 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
           // Navigation items - must be nav type here
           if (item.type === 'nav') {
             return <button key={item.path} onClick={() => handleNavClick(item.path)} className={`
-                    h-10 text-sm font-medium transition-all duration-300 rounded-full px-4 flex items-center whitespace-nowrap
-                    ${isActive ? 'bg-white text-black shadow-lg' : isFocused ? 'bg-gray-600 text-white shadow-lg' : 'text-gray-300 hover:text-white hover:bg-white/10'}
+                    h-10 text-sm font-medium transition-all duration-500 ease-out rounded-full px-4 flex items-center whitespace-nowrap transform
+                    ${isActive ? 'bg-white text-black shadow-lg scale-105' : isFocused ? 'bg-gray-600 text-white shadow-lg scale-105' : 'text-gray-300 hover:text-white hover:bg-white/10 scale-100'}
                   `}>
                   {item.name}
                 </button>;
