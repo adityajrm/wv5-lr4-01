@@ -11,7 +11,8 @@ interface RestaurantNavigationState {
 export const useRestaurantNavigation = (
   categoriesCount: number,
   menuItemsCount: number,
-  navItemsCount: number = 4
+  navItemsCount: number = 4,
+  universalNavigation?: { currentSection: string; setCurrentSection: (section: string) => void; setFocusedIndex: (index: number) => void }
 ) => {
   const { isFocused: isAIFocused, setFocused: setAIFocused } = useAIOrbFocus();
   
@@ -38,6 +39,11 @@ export const useRestaurantNavigation = (
   }, []);
 
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
+    // Only handle restaurant navigation when not in header
+    if (universalNavigation?.currentSection === 'nav') {
+      return;
+    }
+
     setNavigation((prevNavigation) => {
       const { currentSection, focusedIndex } = prevNavigation;
 
@@ -60,7 +66,12 @@ export const useRestaurantNavigation = (
           if (currentSection === 'categories' && focusedIndex > 0) {
             return { currentSection, focusedIndex: focusedIndex - 1 };
           } else if (currentSection === 'categories' && focusedIndex === 0) {
-            return { currentSection: 'nav', focusedIndex: 0 };
+            // Transition back to header navigation
+            if (universalNavigation) {
+              universalNavigation.setCurrentSection('nav');
+              universalNavigation.setFocusedIndex(0);
+            }
+            return prevNavigation;
           } else if (currentSection === 'menu-items' && focusedIndex > 0) {
             const newIndex = focusedIndex - 1;
             setTimeout(() => scrollToFocusedItem('menu-items-container', newIndex), 0);
@@ -132,7 +143,14 @@ export const useRestaurantNavigation = (
       }
       return prevNavigation;
     });
-  }, [categoriesCount, menuItemsCount, navItemsCount, scrollToFocusedItem, setAIFocused]);
+  }, [categoriesCount, menuItemsCount, navItemsCount, scrollToFocusedItem, setAIFocused, universalNavigation]);
+
+  useEffect(() => {
+    // Start restaurant navigation when universal navigation moves to main section
+    if (universalNavigation?.currentSection === 'main') {
+      setNavigation({ currentSection: 'categories', focusedIndex: 0 });
+    }
+  }, [universalNavigation?.currentSection]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);

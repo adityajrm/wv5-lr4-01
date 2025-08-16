@@ -40,13 +40,35 @@ export const useUniversalNavigation = () => {
             event.preventDefault();
             setFocusedIndex((prev) => Math.min(5, prev + 1)); // 6 total items (3 nav + time + weather + ai)
             break;
+          case 'ArrowDown':
+            event.preventDefault();
+            // Transition to main content section
+            setCurrentSection('main');
+            setFocusedIndex(0);
+            break;
+          case 'Enter':
+            event.preventDefault();
+            // Handle Enter key for header items
+            if (focusedIndex < 3) {
+              // Navigation items
+              const navPaths = ['/', '/apps', '/restaurant'];
+              const targetPath = navPaths[focusedIndex];
+              if (targetPath) {
+                window.location.href = targetPath;
+              }
+            } else if (focusedIndex === 5) {
+              // AI Orb
+              const aiButton = document.getElementById('ai-orb-button');
+              if (aiButton) aiButton.click();
+            }
+            break;
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentSection]);
+  }, [currentSection, focusedIndex]);
 
   return {
     currentSection,

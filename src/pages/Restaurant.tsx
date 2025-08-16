@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Clock, Minus, Plus, ShoppingCart } from "lucide-react";
 import { useRestaurantNavigation } from "@/hooks/useRestaurantNavigation";
+import { useNavigation } from "@/hooks/useUniversalNavigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -36,7 +37,7 @@ interface OrderItem extends MenuItem {
   specialInstructions: string;
 }
 const Restaurant = () => {
-  const [weatherCondition, setWeatherCondition] = useState<'sunny' | 'cloudy' | 'rainy' | 'stormy' | 'snowy'>('sunny');
+  const universalNavigation = useNavigation();
   const [selectedCategory, setSelectedCategory] = useState("Pizza");
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [isOrderDialogOpen, setIsOrderDialogOpen] = useState(false);
@@ -51,7 +52,7 @@ const Restaurant = () => {
   const filteredItems = menuItems; // Show all items continuously
 
   // Initialize keyboard navigation
-  const navigation = useRestaurantNavigation(categories.length, filteredItems.length);
+  const navigation = useRestaurantNavigation(categories.length, filteredItems.length, 4, universalNavigation);
   const addToOrder = (item: MenuItem) => {
     const existingItem = orderItems.find(orderItem => orderItem.id === item.id);
     if (existingItem) {
