@@ -23,16 +23,20 @@ export const useRestaurantNavigation = (
 
   const scrollToFocusedItem = useCallback((containerId: string, index: number) => {
     const container = document.getElementById(containerId);
-    const item = container?.children[index] as HTMLElement;
-    if (container && item) {
+    if (!container) return;
+
+    // Find all clickable menu item cards inside the container (they have the cursor-pointer class)
+    const items = Array.from(container.querySelectorAll<HTMLElement>('.cursor-pointer'));
+    const item = items[index];
+    if (item) {
       const containerRect = container.getBoundingClientRect();
       const itemRect = item.getBoundingClientRect();
-      
-      // For vertical scrolling in menu items
+
+      // For vertical scrolling in menu items: only scroll when item is outside visible bounds
       if (itemRect.top < containerRect.top || itemRect.bottom > containerRect.bottom) {
         item.scrollIntoView({
           behavior: 'smooth',
-          block: 'nearest'
+          block: 'nearest',
         });
       }
     }
