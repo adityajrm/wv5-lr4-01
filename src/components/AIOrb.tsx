@@ -45,10 +45,9 @@ const AIOrb: React.FC<AIOrbProps> = ({
 
   // Use focused prop or global focus state
   const isOrbFocused = focused || isFocused;
-  
+
   // Always show the correct state based on connection status
   const shouldShowWaveform = isConnected && !isMuted;
-  
   useEffect(() => {
     // Update global focus state when focused prop changes
     if (focused !== isFocused) {
@@ -61,7 +60,7 @@ const AIOrb: React.FC<AIOrbProps> = ({
         ${isConnected && !isMuted ? 'text-white bg-black/20' : ''}
       `}>
       <div className="flex items-center gap-2 transition-all duration-500 ease-out">
-        <span className="transition-all duration-300 font-bold text-xs text-indigo-500">ATLAS AI</span>
+        <span className="transition-all duration-300 text-indigo-500 font-normal text-sm">Atlas AI</span>
         
         {/* Waveform Animation when active and not muted - smooth entrance/exit */}
         <div className={`
