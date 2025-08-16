@@ -90,7 +90,6 @@ const Restaurant = () => {
     category: "Burgers",
     time: "12-18 min",
     image: beefBurger
-  }];
   const categories = ["Pizza", "Salads", "Main Course", "Pasta", "Burgers", "Dessert", "Appetizers"];
   const filteredItems = menuItems; // Show all items continuously
 

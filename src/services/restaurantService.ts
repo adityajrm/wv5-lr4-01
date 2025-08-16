@@ -53,7 +53,7 @@ class RestaurantService {
       price: 22.99, 
       category: "Pizza",
       time: "18-22 min",
-      image: margheritaPizza
+      image: pepperoniPizza
     },
     { 
       id: "19",
@@ -62,7 +62,7 @@ class RestaurantService {
       price: 24.99, 
       category: "Pizza",
       time: "18-22 min",
-      image: pepperoniPizza
+      image: margheritaPizza
     },
     { 
       id: "20",
@@ -71,7 +71,7 @@ class RestaurantService {
       price: 19.99, 
       category: "Pizza",
       time: "15-20 min",
-      image: margheritaPizza
+      image: pepperoniPizza
     },
     { 
       id: "21",
@@ -80,7 +80,7 @@ class RestaurantService {
       price: 26.99, 
       category: "Pizza",
       time: "20-25 min",
-      image: pepperoniPizza
+      image: margheritaPizza
     },
     // Salads Category
     { 
@@ -108,7 +108,7 @@ class RestaurantService {
       price: 10.99, 
       category: "Salads",
       time: "5-8 min",
-      image: caesarSalad
+      image: greekSalad
     },
     { 
       id: "22",
@@ -117,7 +117,7 @@ class RestaurantService {
       price: 13.99, 
       category: "Salads",
       time: "5-10 min",
-      image: greekSalad
+      image: caesarSalad
     },
     { 
       id: "23",
@@ -126,7 +126,25 @@ class RestaurantService {
       price: 12.99, 
       category: "Salads",
       time: "5-10 min",
+      image: greekSalad
+    },
+    { 
+      id: "41",
+      name: "Cobb Salad", 
+      description: "Mixed greens, bacon, blue cheese, hard-boiled egg, avocado", 
+      price: 15.99, 
+      category: "Salads",
+      time: "8-12 min",
       image: caesarSalad
+    },
+    { 
+      id: "42",
+      name: "Asian Chicken Salad", 
+      description: "Grilled chicken, mixed greens, mandarin oranges, sesame dressing", 
+      price: 16.99, 
+      category: "Salads",
+      time: "10-15 min",
+      image: greekSalad
     },
     // Main Course Category
     { 
@@ -145,7 +163,7 @@ class RestaurantService {
       price: 32.99, 
       category: "Main Course",
       time: "25-30 min",
-      image: grilledSalmon
+      image: beefBurger
     },
     { 
       id: "12",
@@ -154,7 +172,7 @@ class RestaurantService {
       price: 21.99, 
       category: "Main Course",
       time: "18-22 min",
-      image: grilledSalmon
+      image: chickenAlfredo
     },
     { 
       id: "24",
@@ -172,7 +190,7 @@ class RestaurantService {
       price: 29.99, 
       category: "Main Course",
       time: "30-35 min",
-      image: grilledSalmon
+      image: beefBurger
     },
     { 
       id: "26",
@@ -181,7 +199,34 @@ class RestaurantService {
       price: 18.99, 
       category: "Main Course",
       time: "15-20 min",
+      image: chickenAlfredo
+    },
+    { 
+      id: "43",
+      name: "Pork Tenderloin", 
+      description: "Herb-crusted pork tenderloin with apple chutney", 
+      price: 26.99, 
+      category: "Main Course",
+      time: "22-28 min",
       image: grilledSalmon
+    },
+    { 
+      id: "44",
+      name: "Lobster Tail", 
+      description: "Butter-poached lobster tail with garlic mashed potatoes", 
+      price: 38.99, 
+      category: "Main Course",
+      time: "25-30 min",
+      image: grilledSalmon
+    },
+    { 
+      id: "45",
+      name: "Vegetarian Stir Fry", 
+      description: "Fresh vegetables stir-fried with teriyaki sauce over rice", 
+      price: 17.99, 
+      category: "Main Course",
+      time: "12-18 min",
+      image: mushroomRisotto
     },
     // Pasta Category
     { 
@@ -209,7 +254,7 @@ class RestaurantService {
       price: 17.99, 
       category: "Pasta",
       time: "12-15 min",
-      image: chickenAlfredo
+      image: mushroomRisotto
     },
     { 
       id: "27",
@@ -236,6 +281,33 @@ class RestaurantService {
       price: 16.99, 
       category: "Pasta",
       time: "12-15 min",
+      image: mushroomRisotto
+    },
+    { 
+      id: "46",
+      name: "Shrimp Scampi", 
+      description: "Linguine with garlic shrimp in white wine butter sauce", 
+      price: 22.99, 
+      category: "Pasta",
+      time: "15-20 min",
+      image: chickenAlfredo
+    },
+    { 
+      id: "47",
+      name: "Beef Bolognese", 
+      description: "Traditional meat sauce with ground beef over spaghetti", 
+      price: 18.99, 
+      category: "Pasta",
+      time: "15-20 min",
+      image: mushroomRisotto
+    },
+    { 
+      id: "48",
+      name: "Vegetable Primavera", 
+      description: "Fresh seasonal vegetables with penne in light cream sauce", 
+      price: 16.99, 
+      category: "Pasta",
+      time: "12-18 min",
       image: chickenAlfredo
     },
     // Burgers Category
@@ -264,7 +336,7 @@ class RestaurantService {
       price: 17.99, 
       category: "Burgers",
       time: "15-20 min",
-      image: beefBurger
+      image: cheeseburger
     },
     { 
       id: "30",
@@ -273,7 +345,7 @@ class RestaurantService {
       price: 15.99, 
       category: "Burgers",
       time: "12-15 min",
-      image: beefBurger
+      image: cheeseburger
     },
     { 
       id: "31",
@@ -282,7 +354,7 @@ class RestaurantService {
       price: 20.99, 
       category: "Burgers",
       time: "15-18 min",
-      image: cheeseburger
+      image: beefBurger
     },
     { 
       id: "32",
@@ -291,7 +363,25 @@ class RestaurantService {
       price: 19.99, 
       category: "Burgers",
       time: "15-18 min",
+      image: cheeseburger
+    },
+    { 
+      id: "49",
+      name: "Turkey Burger", 
+      description: "Lean turkey patty with cranberry sauce and brie cheese", 
+      price: 18.99, 
+      category: "Burgers",
+      time: "15-20 min",
       image: beefBurger
+    },
+    { 
+      id: "50",
+      name: "Fish Burger", 
+      description: "Crispy fish fillet with tartar sauce and coleslaw", 
+      price: 17.99, 
+      category: "Burgers",
+      time: "12-18 min",
+      image: cheeseburger
     },
     // Desserts Category
     { 
@@ -319,7 +409,7 @@ class RestaurantService {
       price: 8.99, 
       category: "Dessert",
       time: "5-8 min",
-      image: chocolateLavaCake
+      image: tiramisu
     },
     { 
       id: "33",
@@ -328,7 +418,7 @@ class RestaurantService {
       price: 9.99, 
       category: "Dessert",
       time: "5-8 min",
-      image: tiramisu
+      image: chocolateLavaCake
     },
     { 
       id: "34",
@@ -337,7 +427,7 @@ class RestaurantService {
       price: 7.99, 
       category: "Dessert",
       time: "8-12 min",
-      image: chocolateLavaCake
+      image: tiramisu
     },
     { 
       id: "35",
@@ -348,6 +438,33 @@ class RestaurantService {
       time: "5-8 min",
       image: chocolateLavaCake
     },
+    { 
+      id: "51",
+      name: "Panna Cotta", 
+      description: "Silky vanilla panna cotta with fresh berry sauce", 
+      price: 8.99, 
+      category: "Dessert",
+      time: "5-8 min",
+      image: tiramisu
+    },
+    { 
+      id: "52",
+      name: "Gelato Trio", 
+      description: "Three scoops of artisanal gelato: vanilla, chocolate, strawberry", 
+      price: 7.99, 
+      category: "Dessert",
+      time: "3-5 min",
+      image: chocolateLavaCake
+    },
+    { 
+      id: "53",
+      name: "Banoffee Pie", 
+      description: "Banana and toffee pie with whipped cream", 
+      price: 9.99, 
+      category: "Dessert",
+      time: "5-8 min",
+      image: tiramisu
+    },
     // Appetizers Category
     { 
       id: "36",
@@ -356,7 +473,7 @@ class RestaurantService {
       price: 12.99, 
       category: "Appetizers",
       time: "10-15 min",
-      image: beefBurger
+      image: chickenAlfredo
     },
     { 
       id: "37",
@@ -365,7 +482,7 @@ class RestaurantService {
       price: 9.99, 
       category: "Appetizers",
       time: "8-12 min",
-      image: cheeseburger
+      image: margheritaPizza
     },
     { 
       id: "38",
@@ -374,7 +491,7 @@ class RestaurantService {
       price: 11.99, 
       category: "Appetizers",
       time: "8-12 min",
-      image: grilledSalmon
+      image: chickenAlfredo
     },
     { 
       id: "39",
@@ -383,7 +500,7 @@ class RestaurantService {
       price: 13.99, 
       category: "Appetizers",
       time: "10-15 min",
-      image: beefBurger
+      image: cheeseburger
     },
     { 
       id: "40",
@@ -392,7 +509,52 @@ class RestaurantService {
       price: 10.99, 
       category: "Appetizers",
       time: "8-12 min",
-      image: caesarSalad
+      image: greekSalad
+    },
+    { 
+      id: "54",
+      name: "Bruschetta", 
+      description: "Toasted bread with fresh tomatoes, basil, and garlic", 
+      price: 8.99, 
+      category: "Appetizers",
+      time: "5-10 min",
+      image: margheritaPizza
+    },
+    { 
+      id: "55",
+      name: "Shrimp Cocktail", 
+      description: "Chilled jumbo shrimp with cocktail sauce", 
+      price: 14.99, 
+      category: "Appetizers",
+      time: "5-8 min",
+      image: grilledSalmon
+    },
+    { 
+      id: "56",
+      name: "Potato Skins", 
+      description: "Crispy potato skins with bacon, cheese, and sour cream", 
+      price: 10.99, 
+      category: "Appetizers",
+      time: "8-12 min",
+      image: cheeseburger
+    },
+    { 
+      id: "57",
+      name: "Chicken Quesadilla", 
+      description: "Grilled chicken and cheese in flour tortilla with salsa", 
+      price: 11.99, 
+      category: "Appetizers",
+      time: "8-12 min",
+      image: chickenAlfredo
+    },
+    { 
+      id: "58",
+      name: "Stuffed Mushrooms", 
+      description: "Button mushrooms stuffed with herbs and breadcrumbs", 
+      price: 9.99, 
+      category: "Appetizers",
+      time: "10-15 min",
+      image: mushroomRisotto
     }
   ];
 
