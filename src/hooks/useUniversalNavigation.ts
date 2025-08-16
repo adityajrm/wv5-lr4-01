@@ -16,16 +16,26 @@ interface NavigationContextType extends NavigationState {
 export const NavigationContext = createContext<NavigationContextType | null>(null);
 
 export const useUniversalNavigation = () => {
+  // Initialize with persistent focus state
+  const getInitialFocus = () => {
+    const stored = localStorage.getItem('header-focus-index');
+    return stored ? parseInt(stored) : 0;
+  };
+
   const [currentSection, setCurrentSection] = useState('nav');
-  const [focusedIndex, setFocusedIndex] = useState(0);
+  const [focusedIndex, setFocusedIndex] = useState(getInitialFocus);
   const [weatherCondition, setWeatherCondition] = useState<'sunny' | 'cloudy' | 'rainy' | 'stormy' | 'snowy'>('sunny');
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Reset navigation state on route change
+  // Persist focus index to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('header-focus-index', focusedIndex.toString());
+  }, [focusedIndex]);
+
+  // Only reset section on route change, keep focusedIndex persistent
   useEffect(() => {
     setCurrentSection('nav');
-    setFocusedIndex(0);
   }, [location.pathname]);
 
   // Keyboard navigation
@@ -51,14 +61,15 @@ export const useUniversalNavigation = () => {
             event.preventDefault();
             // Handle Enter key for header items
             if (focusedIndex < 3) {
-              // Navigation items
+              // Navigation items - persist focus when navigating
               const navPaths = ['/', '/apps', '/restaurant'];
               const targetPath = navPaths[focusedIndex];
               if (targetPath) {
+                localStorage.setItem('header-focus-index', focusedIndex.toString());
                 navigate(targetPath);
               }
             } else if (focusedIndex === 5) {
-              // AI Orb
+              // AI Orb - trigger click to start/toggle AI
               const aiButton = document.getElementById('ai-orb-button');
               if (aiButton) aiButton.click();
             }

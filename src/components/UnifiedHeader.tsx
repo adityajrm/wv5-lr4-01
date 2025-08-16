@@ -68,7 +68,9 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
     name: 'Atlas AI',
     type: 'ai'
   }];
-  const handleNavClick = (path: string) => {
+  const handleNavClick = (path: string, index: number) => {
+    // Persist focus index when navigating with mouse click
+    localStorage.setItem('header-focus-index', index.toString());
     navigate(path);
   };
   return <div className="flex justify-center w-full p-6 md:p-8 fixed top-0 left-0 right-0 z-[60] py-[25px]">
@@ -107,7 +109,7 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
 
           // Navigation items - must be nav type here
           if (item.type === 'nav') {
-            return <button key={item.path} onClick={() => handleNavClick(item.path)} className={`
+            return <button key={item.path} onClick={() => handleNavClick(item.path, index)} className={`
                     h-10 text-sm font-medium transition-all duration-500 ease-out rounded-full px-4 flex items-center whitespace-nowrap transform
                     ${isActive ? 'bg-white text-black shadow-lg scale-105 translate-x-1' : isFocused ? 'bg-gray-600 text-white shadow-lg scale-105 translate-x-1' : 'text-gray-300 hover:text-white hover:bg-white/10 scale-100 translate-x-0'}
                   `}>
