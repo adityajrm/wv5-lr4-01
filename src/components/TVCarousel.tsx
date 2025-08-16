@@ -108,7 +108,7 @@ const TVCarousel: React.FC = () => {
       </CarouselContent>
       
       <CarouselPrevious data-carousel-prev />
-      <CarouselNext data-carousel-next />
+      
     </Carousel>;
 };
 export default TVCarousel;
