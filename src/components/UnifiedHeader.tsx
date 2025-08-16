@@ -81,17 +81,6 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
         </div>
       )}
       
-      {/* Blue light bar behind header - 20px shorter on each side */}
-      {isConnected && !isMuted && (
-        <div className="absolute flex justify-center items-center pt-6 md:pt-8 inset-0">
-          <div className="relative w-full max-w-fit">
-            <div className="absolute top-[6px] inset-x-5 h-[10px] bg-ai-blue/60 rounded-full overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-ai-blue to-transparent animate-light-bar-pulse rounded-full"></div>
-            </div>
-          </div>
-        </div>
-      )}
-      
       <div className={`
         bg-black/30 backdrop-blur-md rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500 overflow-hidden
         ${isConnected && !isMuted 
@@ -103,25 +92,40 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
         {isConnected && !isMuted && (
           <div className="absolute inset-0 rounded-full bg-ai-blue/10 animate-ai-glow-pulse"></div>
         )}
-        <div className="flex items-center space-x-2 transition-all duration-500 ease-out">
+        <div className={`
+          flex items-center transition-all duration-700 ease-out
+          ${isConnected && !isMuted ? 'space-x-0' : 'space-x-2'}
+        `}>
           {allItems.map((item, index) => {
           const isActive = item.type === 'nav' && 'path' in item && location.pathname === item.path;
           const isFocused = focused && focusedIndex === index;
+          const isAIExpanded = isConnected && !isMuted;
+          const isNonAIItem = item.type !== 'ai';
+          
           if (item.type === 'weather') {
             return <div key="weather" className={`
-                    h-10 flex items-center transition-all duration-500 ease-out rounded-full px-3 transform
-                    ${isFocused ? 'bg-white/20 shadow-lg scale-105 translate-x-1' : 'hover:bg-white/10 scale-100 translate-x-0'}
+                    h-10 flex items-center transition-all duration-700 ease-out rounded-full px-3 transform
+                    ${isAIExpanded ? 'opacity-0 scale-75 pointer-events-none w-0 px-0 overflow-hidden' : 
+                      isFocused ? 'bg-white/20 shadow-lg scale-105 translate-x-1 opacity-100' : 'hover:bg-white/10 scale-100 translate-x-0 opacity-100'}
                   `}>
                   <WeatherWidget onWeatherChange={onWeatherChange} />
                 </div>;
           }
+          
           if (item.type === 'ai') {
-            return <AIOrb key="ai" focused={isFocused} />;
+            return <div key="ai" className={`
+                    transition-all duration-700 ease-out
+                    ${isAIExpanded ? 'flex-1' : 'flex-none'}
+                  `}>
+                  <AIOrb focused={isFocused} />
+                </div>;
           }
+          
           if (item.type === 'time') {
             return <div key="time" className={`
-                    h-10 flex items-center text-gray-300 transition-all duration-500 ease-out rounded-full px-3 transform
-                    ${isFocused ? 'bg-white/20 shadow-lg text-white scale-105 translate-x-1' : 'hover:bg-white/10 hover:text-white scale-100 translate-x-0'}
+                    h-10 flex items-center text-gray-300 transition-all duration-700 ease-out rounded-full px-3 transform
+                    ${isAIExpanded ? 'opacity-0 scale-75 pointer-events-none w-0 px-0 overflow-hidden' : 
+                      isFocused ? 'bg-white/20 shadow-lg text-white scale-105 translate-x-1 opacity-100' : 'hover:bg-white/10 hover:text-white scale-100 translate-x-0 opacity-100'}
                   `}>
                   <Clock size={16} className="mr-2" />
                   <span className="font-semibold whitespace-nowrap text-sm">
@@ -132,9 +136,16 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
 
           // Navigation items - must be nav type here
           if (item.type === 'nav') {
-            return <button key={item.path} onClick={() => handleNavClick(item.path, index)} className={`
-                    h-10 text-sm font-medium transition-all duration-500 ease-out rounded-full px-4 flex items-center whitespace-nowrap transform
-                    ${isActive ? 'bg-white text-black shadow-lg scale-105 translate-x-1' : isFocused ? 'bg-gray-600 text-white shadow-lg scale-105 translate-x-1' : 'text-gray-300 hover:text-white hover:bg-white/10 scale-100 translate-x-0'}
+            return <button 
+                    key={item.path} 
+                    onClick={() => !isAIExpanded && handleNavClick(item.path, index)} 
+                    disabled={isAIExpanded}
+                    className={`
+                    h-10 text-sm font-medium transition-all duration-700 ease-out rounded-full px-4 flex items-center whitespace-nowrap transform
+                    ${isAIExpanded ? 'opacity-0 scale-75 pointer-events-none w-0 px-0 overflow-hidden' : 
+                      isActive ? 'bg-white text-black shadow-lg scale-105 translate-x-1 opacity-100' : 
+                      isFocused ? 'bg-gray-600 text-white shadow-lg scale-105 translate-x-1 opacity-100' : 
+                      'text-gray-300 hover:text-white hover:bg-white/10 scale-100 translate-x-0 opacity-100'}
                   `}>
                   {item.name}
                 </button>;

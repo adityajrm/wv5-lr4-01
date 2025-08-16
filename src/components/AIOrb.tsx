@@ -55,16 +55,19 @@ const AIOrb: React.FC<AIOrbProps> = ({
     }
   }, [focused, isFocused, setFocused]);
   return <button id="ai-orb-button" onClick={handleClick} className={`
-        h-10 text-sm font-medium transition-all duration-500 ease-out rounded-full px-4 flex items-center whitespace-nowrap relative overflow-hidden
+        h-10 text-sm font-medium transition-all duration-700 ease-out rounded-full flex items-center whitespace-nowrap relative overflow-hidden
         ${isOrbFocused ? 'bg-white text-black shadow-lg' : 'text-gray-300 hover:text-white hover:bg-white/10'}
-        ${isConnected && !isMuted ? 'text-white bg-black/20' : ''}
+        ${isConnected && !isMuted ? 'text-white bg-black/20 w-full justify-center' : 'px-4'}
       `}>
-      <div className="flex items-center gap-2 transition-all duration-500 ease-out">
+      <div className={`
+        flex items-center gap-2 transition-all duration-700 ease-out
+        ${isConnected && !isMuted ? 'justify-center' : ''}
+      `}>
         <span className="transition-all duration-300 text-indigo-500 font-normal text-sm">Atlas AI</span>
         
         {/* Waveform Animation when active and not muted - smooth entrance/exit */}
         <div className={`
-          flex items-center gap-0.5 transition-all duration-500 ease-out overflow-hidden
+          flex items-center gap-0.5 transition-all duration-700 ease-out overflow-hidden
           ${shouldShowWaveform ? 'max-w-16 opacity-100 ml-2' : 'max-w-0 opacity-0 ml-0'}
         `}>
           <div className="w-0.5 h-3 bg-ai-blue rounded-full animate-waveform"></div>
