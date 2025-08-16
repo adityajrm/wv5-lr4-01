@@ -80,6 +80,18 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
           <div className="w-[800px] h-20 bg-ai-blue/30 blur-3xl rounded-full animate-ai-glow-pulse"></div>
         </div>
       )}
+      
+      {/* Blue light bar behind header - 20px shorter on each side */}
+      {isConnected && !isMuted && (
+        <div className="absolute flex justify-center items-center pt-6 md:pt-8 inset-0">
+          <div className="relative w-full max-w-fit">
+            <div className="absolute top-[6px] inset-x-5 h-[10px] bg-ai-blue/60 rounded-full overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-ai-blue to-transparent animate-light-bar-pulse rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <div className={`
         bg-black/30 backdrop-blur-md rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500 overflow-hidden
         ${isConnected && !isMuted 

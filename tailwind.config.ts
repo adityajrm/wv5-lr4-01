@@ -181,6 +181,20 @@ export default {
 						opacity: '0.6',
 						transform: 'scale(1.02)'
 					}
+				},
+				'light-bar-pulse': {
+					'0%': { 
+						opacity: '0.3',
+						transform: 'translateX(-100%)'
+					},
+					'50%': { 
+						opacity: '0.8',
+						transform: 'translateX(0%)'
+					},
+					'100%': { 
+						opacity: '0.3',
+						transform: 'translateX(100%)'
+					}
 				}
 			},
 			animation: {
@@ -202,7 +216,8 @@ export default {
 				'waveform-delayed-2': 'waveform 0.7s ease-in-out infinite 0.4s',
 				'ai-pulse-complex': 'ai-pulse-complex 3s ease-in-out infinite',
 				'border-bleed': 'border-bleed 2s ease-in-out forwards',
-				'ai-glow-pulse': 'ai-glow-pulse 2s ease-in-out infinite'
+				'ai-glow-pulse': 'ai-glow-pulse 2s ease-in-out infinite',
+				'light-bar-pulse': 'light-bar-pulse 3s ease-in-out infinite'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
