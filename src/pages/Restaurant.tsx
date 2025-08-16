@@ -80,11 +80,10 @@ const Restaurant = () => {
         }
         return item;
       }).filter(item => item.quantity > 0); // Remove items with 0 quantity
-      
+
       return updatedItems;
     });
   };
-
   const removeItemFromOrder = (id: string) => {
     setOrderItems(prevItems => prevItems.filter(item => item.id !== id));
     // Also call the service method for proper integration
@@ -139,7 +138,7 @@ const Restaurant = () => {
   };
   return <div className="min-h-screen bg-transparent text-white overflow-hidden">
       {/* Main Content - 3 Column Layout */}
-      <div className="flex h-[calc(100vh-120px)] pt-4 py-0 my-[40px]">
+      <div className="flex h-[calc(100vh-120px)] pt-4 py-0 my-0">
         {/* Left Section - Categories */}
         <div className="w-1/4 border-r border-gray-800 p-6">
           <h2 className="text-2xl font-bold mb-6">Categories</h2>
