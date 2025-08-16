@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAIOrbFocus } from './useAIOrbFocus';
 
-export type RestaurantFocusSection = 'nav' | 'categories' | 'menu-items' | 'place-order' | 'ai-button';
+export type RestaurantFocusSection = 'categories' | 'menu-items' | 'place-order' | 'ai-button';
 
 interface RestaurantNavigationState {
   currentSection: RestaurantFocusSection;
@@ -50,9 +50,7 @@ export const useRestaurantNavigation = (
       switch (event.key) {
         case 'ArrowDown':
           event.preventDefault();
-          if (currentSection === 'nav') {
-            return { currentSection: 'categories', focusedIndex: 0 };
-          } else if (currentSection === 'categories' && focusedIndex < categoriesCount - 1) {
+          if (currentSection === 'categories' && focusedIndex < categoriesCount - 1) {
             return { currentSection, focusedIndex: focusedIndex + 1 };
           } else if (currentSection === 'menu-items' && focusedIndex < menuItemsCount - 1) {
             const newIndex = focusedIndex + 1;
@@ -69,7 +67,7 @@ export const useRestaurantNavigation = (
             // Transition back to header navigation
             if (universalNavigation) {
               universalNavigation.setCurrentSection('nav');
-              universalNavigation.setFocusedIndex(0);
+              universalNavigation.setFocusedIndex(2); // Focus on Restaurant tab
             }
             return prevNavigation;
           } else if (currentSection === 'menu-items' && focusedIndex > 0) {
@@ -85,9 +83,12 @@ export const useRestaurantNavigation = (
           event.preventDefault();
           if (currentSection === 'ai-button') {
             setAIFocused(false);
-            return { currentSection: 'nav', focusedIndex: navItemsCount - 1 };
-          } else if (currentSection === 'nav' && focusedIndex > 0) {
-            return { currentSection, focusedIndex: focusedIndex - 1 };
+            // Transition back to header navigation
+            if (universalNavigation) {
+              universalNavigation.setCurrentSection('nav');
+              universalNavigation.setFocusedIndex(5); // AI button index
+            }
+            return { currentSection: 'categories', focusedIndex: 0 };
           } else if (currentSection === 'menu-items') {
             return { currentSection: 'categories', focusedIndex: 0 };
           } else if (currentSection === 'place-order') {
@@ -97,12 +98,7 @@ export const useRestaurantNavigation = (
 
         case 'ArrowRight':
           event.preventDefault();
-          if (currentSection === 'nav' && focusedIndex < navItemsCount - 1) {
-            return { currentSection, focusedIndex: focusedIndex + 1 };
-          } else if (currentSection === 'nav' && focusedIndex === navItemsCount - 1) {
-            setAIFocused(true);
-            return { currentSection: 'ai-button', focusedIndex: 0 };
-          } else if (currentSection === 'categories') {
+          if (currentSection === 'categories') {
             return { currentSection: 'menu-items', focusedIndex: 0 };
           } else if (currentSection === 'menu-items') {
             return { currentSection: 'place-order', focusedIndex: 0 };
@@ -111,12 +107,7 @@ export const useRestaurantNavigation = (
 
         case 'Enter':
           event.preventDefault();
-          if (currentSection === 'nav') {
-            // Trigger navigation click in UnifiedHeader - use the same approach as main navigation
-            const headerButtons = document.querySelectorAll('.bg-black\\/30 button, .bg-black\\/30 .cursor-pointer');
-            const targetButton = headerButtons[focusedIndex] as HTMLElement;
-            if (targetButton) targetButton.click();
-          } else if (currentSection === 'ai-button') {
+          if (currentSection === 'ai-button') {
             const aiButton = document.getElementById('ai-orb-button');
             if (aiButton) aiButton.click();
           } else if (currentSection === 'categories') {

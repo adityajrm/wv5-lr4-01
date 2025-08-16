@@ -70,8 +70,12 @@ export const useUniversalNavigation = () => {
               }
             } else if (focusedIndex === 5) {
               // AI Orb - trigger click to start/toggle AI
+              event.preventDefault();
+              event.stopPropagation();
               const aiButton = document.getElementById('ai-orb-button');
-              if (aiButton) aiButton.click();
+              if (aiButton) {
+                aiButton.click();
+              }
             }
             break;
         }

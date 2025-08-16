@@ -74,9 +74,15 @@ const UnifiedHeader: React.FC<UnifiedHeaderProps> = ({
     navigate(path);
   };
   return <div className="flex justify-center w-full p-6 md:p-8 fixed top-0 left-0 right-0 z-[60] py-[25px]">
+      {/* Enhanced blue glow background when AI is active */}
+      {isConnected && !isMuted && (
+        <div className="absolute inset-0 flex justify-center items-start pt-6 md:pt-8">
+          <div className="w-full max-w-fit h-12 bg-ai-blue/20 blur-xl rounded-full animate-pulse"></div>
+        </div>
+      )}
       <div className={`
         bg-black/30 backdrop-blur-md border rounded-full shadow-2xl py-[4px] px-[4px] relative transition-all duration-500 overflow-hidden
-        ${isConnected && !isMuted ? 'border-ai-blue shadow-ai-blue/50 animate-ai-pulse-complex animate-border-bleed' : 'border-white/10'}
+        ${isConnected && !isMuted ? 'border-ai-blue border-2 shadow-ai-blue/70 shadow-2xl ring-2 ring-ai-blue/30 animate-ai-pulse-complex animate-border-bleed' : 'border-white/10'}
       `}>
         {/* Blue glow overlay when AI is active */}
         {isConnected && !isMuted && <div className="absolute inset-0 rounded-full bg-ai-blue/10 animate-ai-glow-pulse"></div>}
