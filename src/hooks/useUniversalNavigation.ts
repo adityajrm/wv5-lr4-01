@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface NavigationState {
   currentSection: string;
@@ -20,6 +20,7 @@ export const useUniversalNavigation = () => {
   const [focusedIndex, setFocusedIndex] = useState(0);
   const [weatherCondition, setWeatherCondition] = useState<'sunny' | 'cloudy' | 'rainy' | 'stormy' | 'snowy'>('sunny');
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Reset navigation state on route change
   useEffect(() => {
@@ -54,7 +55,7 @@ export const useUniversalNavigation = () => {
               const navPaths = ['/', '/apps', '/restaurant'];
               const targetPath = navPaths[focusedIndex];
               if (targetPath) {
-                window.location.href = targetPath;
+                navigate(targetPath);
               }
             } else if (focusedIndex === 5) {
               // AI Orb

@@ -123,18 +123,10 @@ export const useRestaurantNavigation = (
             const categoryElement = document.querySelector(`#categories-container > *:nth-child(${focusedIndex + 1})`) as HTMLElement;
             if (categoryElement) categoryElement.click();
           } else if (currentSection === 'menu-items') {
-            // Fix: Find the correct menu item by counting through all categories
-            let currentIndex = 0;
-            const categories = ["Pizza", "Salads", "Main Course", "Pasta", "Burgers", "Dessert", "Appetizers"];
-            for (const category of categories) {
-              const categoryItems = document.querySelectorAll(`#category-section-${category.toLowerCase()} .cursor-pointer`);
-              if (focusedIndex < currentIndex + categoryItems.length) {
-                const targetItem = categoryItems[focusedIndex - currentIndex] as HTMLElement;
-                if (targetItem) targetItem.click();
-                break;
-              }
-              currentIndex += categoryItems.length;
-            }
+            // Find the correct menu item card
+            const menuCards = document.querySelectorAll('#menu-items-container .cursor-pointer');
+            const targetCard = menuCards[focusedIndex] as HTMLElement;
+            if (targetCard) targetCard.click();
           } else if (currentSection === 'place-order') {
             const orderButton = document.getElementById('place-order-button');
             if (orderButton) orderButton.click();
