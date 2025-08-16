@@ -136,9 +136,9 @@ const Restaurant = () => {
     setRoomNumber("");
     setIsOrderDialogOpen(false);
   };
-  return <div className="min-h-screen bg-transparent text-white overflow-hidden">
+    return <div className="min-h-screen bg-transparent text-white overflow-hidden">
       {/* Main Content - 3 Column Layout */}
-      <div className="flex h-[calc(100vh-120px)] pt-4 py-0 my-0">
+      <div className="flex h-[calc(100vh-120px)] pt-4 py-0 my-0 fixed w-full">
         {/* Left Section - Categories */}
         <div className="w-1/4 border-r border-gray-800 p-6">
           <h2 className="text-2xl font-bold mb-6">Categories</h2>
@@ -156,7 +156,7 @@ const Restaurant = () => {
           }} className={`
                   w-full text-left px-4 py-2 rounded-lg transition-all duration-200
                   ${selectedCategory === category ? 'text-white bg-white/10 font-semibold' : 'text-gray-400 hover:text-gray-300 hover:bg-gray-900/50'}
-                  ${navigation.currentSection === 'categories' && navigation.focusedIndex === index ? 'ring-2 ring-white' : ''}
+                  ${navigation.currentSection === 'categories' && navigation.focusedIndex === index && navigation.focusedIndex !== -1 ? 'ring-2 ring-white' : ''}
                 `}>
                 {category}
               </button>)}
@@ -179,7 +179,7 @@ const Restaurant = () => {
                 const globalIndex = filteredItems.findIndex(globalItem => globalItem.id === item.id);
                 return <Card key={item.id} id={`menu-item-${globalIndex}`} className={`
                         bg-gray-900/50 border-gray-700 hover:border-gray-500 transition-all duration-300 cursor-pointer
-                        ${navigation.currentSection === 'menu-items' && navigation.focusedIndex === globalIndex ? 'border-white bg-white/10 shadow-lg shadow-white/20' : ''}
+                        ${navigation.currentSection === 'menu-items' && navigation.focusedIndex === globalIndex && navigation.focusedIndex !== -1 ? 'border-white bg-white/10 shadow-lg shadow-white/20' : ''}
                       `} onClick={() => addToOrder(item)}>
                       <CardContent className="p-4">
                         <div className="flex gap-4">

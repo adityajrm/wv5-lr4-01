@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TVAppCard from "@/components/TVAppCard";
-import { useKeyboardNavigation } from "@/hooks/useKeyboardNavigation";
+import { useAppsGridNavigation } from "@/hooks/useAppsGridNavigation";
 
 // Import images
 import netflixIcon from "@/assets/netflix-icon.jpg";
@@ -30,7 +30,7 @@ const Apps = () => {
   ];
 
   // Initialize keyboard navigation
-  const navigation = useKeyboardNavigation(streamingApps.length, 0, 0, 0, 5); // 5 nav items (nav + time + weather)
+  const navigation = useAppsGridNavigation(streamingApps.length, 5);
 
   return (
     <div className="min-h-screen bg-transparent text-white relative overflow-x-hidden">
@@ -45,7 +45,7 @@ const Apps = () => {
           <div id="apps-container" className="grid grid-cols-3 gap-6 md:gap-8 w-full max-w-full">
             {streamingApps.map((app, index) => (
               <TVAppCard 
-                key={index} 
+                key={index}
                 name={app.name}
                 icon={app.icon}
                 url={app.url}

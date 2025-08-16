@@ -17,8 +17,8 @@ export const useRestaurantNavigation = (
   const { isFocused: isAIFocused, setFocused: setAIFocused } = useAIOrbFocus();
   
   const [navigation, setNavigation] = useState<RestaurantNavigationState>({
-    currentSection: isAIFocused ? 'ai-button' : 'categories',
-    focusedIndex: 0,
+    currentSection: isAIFocused ? 'ai-button' : 'menu-items', // Start with menu-items instead of categories
+    focusedIndex: -1, // Start with no focus
   });
 
   const scrollToFocusedItem = useCallback((containerId: string, index: number) => {
@@ -54,8 +54,14 @@ export const useRestaurantNavigation = (
       switch (event.key) {
         case 'ArrowDown':
           event.preventDefault();
-          if (currentSection === 'categories' && focusedIndex < categoriesCount - 1) {
+          if (currentSection === 'categories' && focusedIndex === -1) {
+            // When navigation enters categories section, start with first item
+            return { currentSection, focusedIndex: 0 };
+          } else if (currentSection === 'categories' && focusedIndex < categoriesCount - 1) {
             return { currentSection, focusedIndex: focusedIndex + 1 };
+          } else if (currentSection === 'menu-items' && focusedIndex === -1) {
+            // When navigation enters menu-items section, start with first item
+            return { currentSection, focusedIndex: 0 };
           } else if (currentSection === 'menu-items' && focusedIndex < menuItemsCount - 1) {
             const newIndex = focusedIndex + 1;
             setTimeout(() => scrollToFocusedItem('menu-items-container', newIndex), 0);
@@ -67,6 +73,9 @@ export const useRestaurantNavigation = (
           event.preventDefault();
           if (currentSection === 'categories' && focusedIndex > 0) {
             return { currentSection, focusedIndex: focusedIndex - 1 };
+          } else if (currentSection === 'categories' && focusedIndex === -1) {
+            // When navigation enters categories section, start with first item
+            return { currentSection, focusedIndex: 0 };
           } else if (currentSection === 'categories' && focusedIndex === 0) {
             // Transition back to header navigation
             if (universalNavigation) {
@@ -74,6 +83,9 @@ export const useRestaurantNavigation = (
               universalNavigation.setFocusedIndex(2); // Focus on Restaurant tab
             }
             return prevNavigation;
+          } else if (currentSection === 'menu-items' && focusedIndex === -1) {
+            // When navigation enters menu-items section, start with first item
+            return { currentSection, focusedIndex: 0 };
           } else if (currentSection === 'menu-items' && focusedIndex > 0) {
             const newIndex = focusedIndex - 1;
             setTimeout(() => scrollToFocusedItem('menu-items-container', newIndex), 0);
