@@ -125,9 +125,9 @@ const AgenticModeOverlay: React.FC<AgenticModeOverlayProps> = ({
   if (!isOpen) return null;
   return <div className="fixed inset-0 z-40 bg-black/90 backdrop-blur-sm">
       <div className="absolute inset-0 flex items-end justify-center px-[30px]">
-        <div ref={overlayRef} className="bg-zinc-900 rounded-t-2xl shadow-2xl w-full max-w-6xl h-[88vh] overflow-hidden border-t border-l border-r border-zinc-700 focus:outline-none flex flex-col" tabIndex={0} onKeyDown={handleKeyDown}>
+        <div ref={overlayRef} tabIndex={0} onKeyDown={handleKeyDown} className="bg-zinc-900 rounded-t-2xl shadow-2xl w-full max-w-6xl h-[88vh] overflow-hidden border-t border-l border-r border-zinc-700 focus:outline-none flex flex-col py-0 my-0">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-zinc-700 flex-shrink-0 py-[9px]">
+          <div className="flex items-center justify-between p-6 border-b border-zinc-700 flex-shrink-0 py-[9px] bg-neutral-900">
             <div className="flex-1">
               <h2 className="text-2xl font-bold text-white">
                 {loading ? <span className="animate-pulse">Atlas is Generating Content...</span> : content?.title || 'Agentic Mode'}
@@ -160,7 +160,7 @@ const AgenticModeOverlay: React.FC<AgenticModeOverlayProps> = ({
           </div>
 
           {/* Content */}
-          <div ref={contentRef} className="flex-1 overflow-y-auto py-[40px] px-[110px]">
+          <div ref={contentRef} className="flex-1 overflow-y-auto py-[40px] px-[110px] bg-neutral-900">
             {loading ? <div className="flex items-center justify-center h-full">
                 <div className="text-center">
                   <p className="text-zinc-400 text-lg animate-pulse">
