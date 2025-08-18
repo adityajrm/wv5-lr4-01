@@ -407,7 +407,7 @@ export class GeminiLiveAudioService {
       await this.inputAudioContext.resume();
       await this.outputAudioContext.resume();
 
-      const model = 'gemini-2.5-flash-live-preview';
+      const model = 'gemini-2.5-flash-preview-native-audio-dialog';
 
       this.session = await this.client.live.connect({
         model: model,
@@ -496,7 +496,7 @@ export class GeminiLiveAudioService {
           speechConfig: {
             voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Orus' } },
           },
-          tools: [{ functionDeclarations }],
+          tools: [{ googleSearch: {} }, { functionDeclarations }],
           systemInstruction: undefined,
         },
       });
