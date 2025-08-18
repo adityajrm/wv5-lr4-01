@@ -3,7 +3,7 @@ import { createBlob, decode, decodeAudioData } from '../utils/geminiUtils';
 import { homeAssistantService } from './homeAssistantService';
 import { restaurantService } from './restaurantService';
 
-const GEMINI_API_KEY = 'AIzaSyA9flNk5RP21zFdvC3I0p4LBp5sZgL7048';
+const GEMINI_API_KEY = 'AIzaSyAGdc0AlJqWxI3BD-Fgb1n6StFxjQwMGL8';
 
 // Function declarations for Gemini Live
 const functionDeclarations = [
